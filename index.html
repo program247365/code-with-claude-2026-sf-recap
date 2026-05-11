@@ -510,11 +510,51 @@
   }
 
   .highlights { background: var(--bg-dim); border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
-  .highlights .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.5rem; margin-top: 2rem; }
-  .hl { background: var(--bg); border: 1px solid var(--rule); border-radius: var(--r-md); padding: 1.4rem; transition: transform .25s ease, box-shadow .25s ease; }
-  .hl:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+  .highlights .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; margin-top: 2rem; }
+  .hl {
+    background: var(--bg);
+    border: 1px solid var(--rule);
+    border-radius: var(--r-md);
+    padding: 1.4rem 1.4rem 1.2rem;
+    transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+    color: inherit;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+  }
+  .hl:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--rule-strong);
+  }
+  .hl:hover .hl-source { color: var(--accent-deep); }
   .hl .num { font-family: var(--serif); font-size: 2rem; line-height: 1; color: var(--accent); font-weight: 500; margin-bottom: .55rem; }
-  .hl .label { font-size: .85rem; color: var(--ink-soft); }
+  .hl .label { font-size: .85rem; color: var(--ink-soft); flex: 1; }
+  .hl-source {
+    margin-top: 1rem;
+    padding-top: .8rem;
+    border-top: 1px dashed var(--rule);
+    font-family: var(--mono);
+    font-size: .68rem;
+    color: var(--ink-mute);
+    line-height: 1.4;
+    letter-spacing: .02em;
+    transition: color .2s ease;
+  }
+  .hl-source .src-label {
+    text-transform: uppercase;
+    letter-spacing: .12em;
+    margin-right: .35rem;
+  }
+  .hl-source .src-talk {
+    color: var(--ink-soft);
+    font-family: var(--sans);
+    font-style: italic;
+  }
+  .hl-source .src-speaker {
+    color: var(--ink-mute);
+    font-family: var(--sans);
+  }
 
   footer { padding: 4rem 1.5rem 3rem; text-align: center; color: var(--ink-mute); font-size: .85rem; border-top: 1px solid var(--rule); }
   footer .links { display: flex; flex-wrap: wrap; gap: 1.5rem; justify-content: center; margin-bottom: 1.2rem; }
@@ -543,6 +583,69 @@
   .modal-body .takeaways h5 { font-size: .75rem; text-transform: uppercase; letter-spacing: .12em; color: var(--accent-deep); margin: 0 0 .6rem; font-weight: 600; }
   .modal-body .takeaways ul { margin: 0; padding-left: 1.1rem; color: var(--ink); font-size: .94rem; }
   .modal-body .takeaways li { margin-bottom: .35rem; line-height: 1.5; }
+  .modal-slides {
+    margin: 1.8rem 0 .5rem;
+    padding-top: 1.4rem;
+    border-top: 1px solid var(--rule);
+  }
+  .modal-slides h5 {
+    font-size: .72rem;
+    text-transform: uppercase;
+    letter-spacing: .14em;
+    color: var(--accent-deep);
+    margin: 0 0 .2rem;
+    font-weight: 600;
+  }
+  .modal-slides .slides-sub {
+    font-size: .8rem;
+    color: var(--ink-mute);
+    margin: 0 0 1.2rem;
+    font-family: var(--mono);
+    letter-spacing: .02em;
+  }
+  .modal-slide {
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    gap: 1.2rem;
+    padding: 1rem 0;
+    border-bottom: 1px dashed var(--rule);
+  }
+  .modal-slide:last-child { border-bottom: 0; }
+  .modal-slide-thumb {
+    width: 180px;
+    height: 110px;
+    object-fit: cover;
+    border-radius: var(--r-sm);
+    background: var(--bg-dim);
+    cursor: zoom-in;
+    transition: transform .2s ease, box-shadow .2s ease;
+    border: 1px solid var(--rule);
+  }
+  .modal-slide-thumb:hover {
+    transform: scale(1.02);
+    box-shadow: var(--shadow-md);
+  }
+  .modal-slide-content h6 {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: 1.05rem;
+    line-height: 1.25;
+    margin: 0 0 .5rem;
+    color: var(--ink);
+  }
+  .modal-slide-content ul {
+    margin: 0;
+    padding-left: 1.1rem;
+    font-size: .88rem;
+    color: var(--ink-soft);
+    line-height: 1.55;
+  }
+  .modal-slide-content li { margin-bottom: .3rem; }
+  @media (max-width: 600px) {
+    .modal-slide { grid-template-columns: 1fr; gap: .7rem; }
+    .modal-slide-thumb { width: 100%; height: 180px; }
+  }
+
   .modal-body .ext-links { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: 1.5rem; }
   .modal-body .ext-links a { display: inline-flex; align-items: center; gap: .4rem; padding: .55rem .9rem; border-radius: var(--r-sm); border: 1px solid var(--rule-strong); background: var(--bg); color: var(--ink); font-size: .85rem; font-weight: 500; }
   .modal-body .ext-links a:hover { background: var(--bg-dim); border-color: var(--accent); color: var(--accent-deep); }
@@ -933,14 +1036,7 @@
       <h2>The themes that ran through it all</h2>
       <span class="meta">recurring patterns</span>
     </div>
-    <div class="grid">
-      <div class="hl"><div class="num">01</div><div class="label"><b>Evals close the loop.</b> Your agent is what your evals make it to be &mdash; LLM-as-judge calibrated against human disagreement signals.</div></div>
-      <div class="hl"><div class="num">02</div><div class="label"><b>Skills over long prompts.</b> A 400-line system prompt is a smell. Decompose into skills, tools, and one well-placed subagent.</div></div>
-      <div class="hl"><div class="num">03</div><div class="label"><b>Plan in HTML, not Markdown.</b> Rich artifacts &mdash; diagrams, code blocks, multiple UI variants &mdash; beat long flat plans for human comprehension.</div></div>
-      <div class="hl"><div class="num">04</div><div class="label"><b>Make the app verifiable at runtime.</b> Build apps so an agent can introspect state, not just read code or wait for tests.</div></div>
-      <div class="hl"><div class="num">05</div><div class="label"><b>Trajectory ledgers.</b> Append-only logs of every coding session, Slack thread, and meeting &mdash; context as the new org chart.</div></div>
-      <div class="hl"><div class="num">06</div><div class="label"><b>"Interview me."</b> The magic phrase. Let Claude pull intent out of your head before it writes a line.</div></div>
-    </div>
+    <div class="grid" id="themeGrid"></div>
   </section>
 </div>
 
@@ -1216,6 +1312,226 @@ const SESSIONS = [
     sessionUrl:"https://claude.com/code-with-claude/session/sf-ext-claude-the-self-driving-company" }
 ];
 
+// ─── recurring themes across the two days ───
+// Each theme attributes a specific talk (or in #03's case, a Day 1 pattern
+// observed across multiple talks since the originating "Ambiguity removal"
+// session is not publicly listed at the session-page URL).
+// The /update-site skill verifies each `sessionUrl` is reachable and that
+// the source talk still appears in SESSIONS.
+const THEMES = [
+  {
+    num: "01",
+    title: "Evals close the loop.",
+    body: "Your agent is what your evals make it to be — LLM-as-judge calibrated against human disagreement signals.",
+    source: {
+      talk: "Evals for subjective, stateful agents",
+      speaker: "Yikai Zhu & Ajay Arasanipalai",
+      day: 2,
+      sessionUrl: "https://claude.com/code-with-claude/session/sf-ext-evals-for-subjective-stateful-agents"
+    }
+  },
+  {
+    num: "02",
+    title: "Skills over long prompts.",
+    body: "A 400-line system prompt is a smell. Decompose into skills, tools, and one well-placed subagent.",
+    source: {
+      talk: "Tool, skill, or subagent? Decomposing an agent that outgrew its prompt",
+      speaker: "Tanveer Mittal",
+      day: 2,
+      sessionUrl: "https://claude.com/code-with-claude/session/sf-ext-compose-multi-agent-systems-with-skills-and-mcp"
+    }
+  },
+  {
+    num: "03",
+    title: "Plan in HTML, not Markdown.",
+    body: "Rich artifacts — diagrams, code blocks, multiple UI variants — beat long flat plans for human comprehension.",
+    source: {
+      talk: "Day 1 cross-talk pattern (Ambiguity removal, understanding & verification)",
+      speaker: "Anthropic Applied AI",
+      day: 1,
+      sessionUrl: "https://claude.com/code-with-claude/san-francisco",
+      note: "Pattern observed across multiple Day 1 talks; the originating session was not published as a standalone session page."
+    }
+  },
+  {
+    num: "04",
+    title: "Make the app verifiable at runtime.",
+    body: "Build apps so an agent can introspect state, not just read code or wait for tests.",
+    source: {
+      talk: "How we Claude Code",
+      speaker: "Thariq Shihipar",
+      day: 2,
+      sessionUrl: "https://claude.com/code-with-claude/session/sf-ext-how-we-claude-code"
+    }
+  },
+  {
+    num: "05",
+    title: "Trajectory ledgers.",
+    body: "Append-only logs of every coding session, Slack thread, and meeting — context as the new org chart.",
+    source: {
+      talk: "Claude & the self-driving company",
+      speaker: "Nicolai Ouporov",
+      day: 2,
+      sessionUrl: "https://claude.com/code-with-claude/session/sf-ext-claude-the-self-driving-company"
+    }
+  },
+  {
+    num: "06",
+    title: "\"Interview me.\"",
+    body: "The magic phrase. Let Claude pull intent out of your head before it writes a line.",
+    source: {
+      talk: "How we Claude Code",
+      speaker: "Thariq Shihipar",
+      day: 2,
+      sessionUrl: "https://claude.com/code-with-claude/session/sf-ext-how-we-claude-code"
+    }
+  }
+];
+
+// ─── slide captures: bullets transcribed from Kevin's photos of session slides ───
+// Keyed by session slug (the last path segment of sessionUrl). When a session
+// modal opens, any matching entries here render as a "Slides Kevin captured"
+// list under the takeaways. Click a slide thumbnail → lightbox at that photo.
+const SLIDES = {
+  "sf-ext-evals-for-subjective-stateful-agents": [
+    {
+      photo: "photos/IMG_1086.jpg",
+      title: "Runtime: run against production",
+      bullets: [
+        "Restore state — project + application state + context.",
+        "Drive the real product (Playwright).",
+        "Run the agent with production API and tools.",
+        "Capture artifacts: states, logs, traces, errors."
+      ]
+    },
+    {
+      photo: "photos/IMG_1087.jpg",
+      title: "Text-based diff of app state",
+      bullets: [
+        "Represent the agent's effect on the app as a text diff — Scene MODIFIED, Script, Layers, Clips.",
+        "The LLM judge sees the change, not the user actions. Harness changes don't affect the comparison."
+      ]
+    },
+    {
+      photo: "photos/IMG_1088.jpg",
+      title: "Calibrating the scorer with humans",
+      bullets: [
+        "Subjective tasks have no ground truth.",
+        "Human labels are important, but not perfect.",
+        "Disagreement is a signal — use human↔LLM disagreement as your eval's reward signal."
+      ]
+    },
+    {
+      photo: "photos/IMG_1089.jpg",
+      title: "Case study: Claude 4.6 — diagnosis",
+      bullets: [
+        "Evals found 4.6 was a lot more expensive out of the box than 4.5 — avg cost-per-task closer to Opus 4.5 than Sonnet 4.5.",
+        "Sonnet 4.6 used 2.2× more LLM calls per task (33.2 vs 15.3 avg) because of overly granular, step-by-step tool usage.",
+        "Root cause: 4.6 breaks operations into tiny steps where 4.5 batches them. Error-recovery retries re-send the full context each time.",
+        "Issue specific to Sonnet 4.6 — Opus 4.6 does NOT exhibit this behavior."
+      ]
+    },
+    {
+      photo: "photos/IMG_1090.jpg",
+      title: "Case study: Claude 4.6 — Anthropic's suggested harness changes",
+      bullets: [
+        "Switched to low effort.",
+        "Softened MUST / NEVER / ALWAYS directives into plain instructions (e.g. \"Enter this planning workflow when…\").",
+        "Removed anti-laziness emphasis (\"VERY frequently\", \"EXTREMELY helpful\", \"that is unacceptable\").",
+        "Replaced \"Atomic Operations\" framing with \"Efficient Tool Use\" — encourage batching, warn against many small calls.",
+        "Trimmed redundant instructions.",
+        "Result: +3% on \"don't break things\", −17% cost per task, −19% token usage, −16% latency."
+      ]
+    },
+    {
+      photo: "photos/IMG_1091.jpg",
+      title: "Quality flywheel",
+      bullets: [
+        "Identify failure modes — look for high-signal queries: reverts, thumbs-down, in-chat complaints.",
+        "Construct evals — collate into a dataset of replayable user moments.",
+        "Iterate — run distributed evals to test many candidates quickly, in parallel.",
+        "Ship the winner — launch new models, experiment with new harnesses, with confidence."
+      ]
+    }
+  ],
+
+  "sf-ext-compose-multi-agent-systems-with-skills-and-mcp": [
+    {
+      photo: "photos/IMG_1103.jpg",
+      title: "Built right… for early 2025",
+      bullets: [
+        "Every choice was defensible when made. Bottlenecks in capability emerge from accumulation.",
+        "12 inline tools — every result dumped raw into context (StockPilot orchestrator + forecasting, procurement, and writing subagents).",
+        "Three of those subagents are thin wrappers around a hardcoded subagent — round-trip, returns prose.",
+        "Tool sprawl: get_low_stock, get_sales_velocity, update_erp_record, get_supplier_catalog, compare_supplier_quotes, draft_email_to_supplier, forecast_demand, etc."
+      ]
+    },
+    {
+      photo: "photos/IMG_1104.jpg",
+      title: "12 tasks × 5 grader types",
+      bullets: [
+        "Grader types: exact_match, set_match, numeric_tolerance, LLM judge, composite (action + ranked).",
+        "Single-read tasks → exact_match. Numeric forecasts → numeric_tolerance with ±5%–±25% bands depending on uncertainty.",
+        "Report-structure tasks → LLM judge. Efficiency tasks → token-budget grader (95% out-tokens).",
+        "Aggregate score = (PASS + ½·PASS-SLOW) / 12. Reference before/after starter: 63%–75%."
+      ]
+    }
+  ],
+
+  "sf-ext-eval-driven-agent-development": [
+    {
+      photo: "photos/IMG_1101.jpg",
+      title: "Why are evals important?",
+      bullets: [
+        "Without evals: teams fly blind and get stuck in reactive loops — catching issues only in production, fixing one failure creates others, can't distinguish genuine feedback from noise, no way to verify improvements except guess-and-check.",
+        "With evals: streamline AI system development — forcing clarity (what does success look like?), iterating on optimal agent configs, adopting new models fast with insights into performance / latency / cost / error rates, making problems visible before launch and upholding a consistent quality bar."
+      ]
+    }
+  ],
+
+  "sf-ext-how-we-claude-code": [
+    {
+      photo: "photos/IMG_1077.jpg",
+      title: "Three tools for working with long-running agents",
+      bullets: [
+        "Removing ambiguity — make the agent interview you before it commits to anything.",
+        "Understanding & planning — plans you can actually read. HTML, not Markdown.",
+        "Integrated verification — build verification in from the start, not bolt it on at the end."
+      ]
+    },
+    {
+      photo: "photos/IMG_1078.jpg",
+      title: "HTML plans are easier to read — and capture more of the model's thinking",
+      bullets: [
+        "Markdown plan (yesterday): a flat list of bullets under # Scope / ## Open questions / etc.",
+        "HTML plan (today): SCOPE box (Even split · Tracking · Venmo), OPEN box (Tip · Currency · Auth), FLOW (Add bill → Split → Send).",
+        "Same content, but the HTML version makes structure, scope edges, and unresolved questions visible at a glance."
+      ]
+    }
+  ],
+
+  "sf-ext-claude-the-self-driving-company": [
+    {
+      photo: "photos/IMG_1112.jpg",
+      title: "Fleet's view of the org (live)",
+      bullets: [
+        "FleetFabric dashboard — every coding session, Slack thread, Linear ticket, and meeting indexed in one place.",
+        "Live activity flowing across the team — bubble chart of who's working on what, stacked-bar throughput by engineer.",
+        "The point: review Claude Code sessions, not just code. Manage a fleet of agents."
+      ]
+    },
+    {
+      photo: "photos/IMG_1113.jpg",
+      title: "The trajectory ledger, instrumented",
+      bullets: [
+        "Recent activity feed across engineers, each card a session snapshot with diffs, references, and decisions.",
+        "Counters: 12,395 total events · 8,951 from Slack · 2,375 from Linear · 1,069 from GitHub — one queryable graph.",
+        "Onboarding without 6-month archaeology. Pick up the full session context — not a status update."
+      ]
+    }
+  ]
+};
+
 // ─── conference photos (taken by Kevin B. Ridgway) ───
 // Generated by scripts/process_photos.py from conf-pics/. Time is local PT.
 const PHOTOS = [
@@ -1437,6 +1753,10 @@ function openModal(idx) {
         </div>
       </div>`;
   }
+  // pull slides keyed by the session's slug (last path segment of sessionUrl)
+  const slugMatch = s.sessionUrl && s.sessionUrl.match(/\/session\/([^?#/]+)/);
+  const sessionSlides = slugMatch ? (SLIDES[slugMatch[1]] || []) : [];
+
   $modalBody.innerHTML = `
     <span class="pill ${esc(s.type)}">${esc(PILL_LABELS[s.type] || 'Session')} &middot; ${esc(s.time)} &middot; Day ${s.day}</span>
     <h3 id="modalTitle">${esc(s.title)}</h3>
@@ -1447,11 +1767,38 @@ function openModal(idx) {
         <h5>Key takeaways</h5>
         <ul>${s.takeaways.map(t => `<li>${esc(t)}</li>`).join('')}</ul>
       </div>` : ''}
+    ${sessionSlides.length ? `
+      <div class="modal-slides">
+        <h5>From the slides</h5>
+        <p class="slides-sub">Captured live during the talk &middot; ${sessionSlides.length} slide${sessionSlides.length === 1 ? '' : 's'} &middot; tap a thumbnail to enlarge</p>
+        ${sessionSlides.map((sl, i) => `
+          <div class="modal-slide">
+            <img class="modal-slide-thumb" src="${esc(sl.photo)}" alt="${esc(sl.title)}" data-photo-idx="${i}" loading="lazy">
+            <div class="modal-slide-content">
+              <h6>${esc(sl.title)}</h6>
+              <ul>${sl.bullets.map(b => `<li>${esc(b)}</li>`).join('')}</ul>
+            </div>
+          </div>`).join('')}
+      </div>` : ''}
     <div class="ext-links">
       ${s.sessionUrl ? `<a href="${esc(s.sessionUrl)}" target="_blank" rel="noopener">
         <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M7 2H2v10h10V7"/><path d="M9 1h4v4M6 8L13 1"/></svg>
         Session page</a>` : ''}
     </div>`;
+
+  // wire slide thumbnails to the lightbox
+  if (sessionSlides.length) {
+    $modalBody.querySelectorAll('.modal-slide-thumb').forEach(img => {
+      img.addEventListener('click', () => {
+        const idx = parseInt(img.dataset.photoIdx, 10);
+        const photoSet = sessionSlides.map(sl => ({
+          src: sl.photo, day: s.day, time: s.time,
+          label: `${sl.title} — ${s.title}`
+        }));
+        openLightbox(photoSet, idx);
+      });
+    });
+  }
   $modal.classList.add('open');
   $modal.setAttribute('aria-hidden', 'false');
   document.body.style.overflow = 'hidden';
@@ -1564,6 +1911,25 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape' && $modal.cla
       }, 1400);
     }
   } catch (_) { /* localStorage disabled — skip the auto-hint */ }
+})();
+
+// ─── render the themes section (data lives in THEMES above) ───
+(function renderThemes() {
+  const grid = document.getElementById('themeGrid');
+  if (!grid) return;
+  grid.innerHTML = THEMES.map(t => {
+    const s = t.source;
+    return `
+      <a class="hl" href="${esc(s.sessionUrl)}" target="_blank" rel="noopener" title="Read more: ${esc(s.talk)}">
+        <div class="num">${esc(t.num)}</div>
+        <div class="label"><b>${esc(t.title)}</b> ${esc(t.body)}</div>
+        <div class="hl-source">
+          <span class="src-label">Source</span>
+          <span class="src-talk">${esc(s.talk)}</span><br>
+          <span class="src-speaker">${esc(s.speaker)} · Day ${s.day}</span>
+        </div>
+      </a>`;
+  }).join('');
 })();
 
 // ─── stats + init ───

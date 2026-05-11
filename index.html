@@ -89,32 +89,62 @@
         rgba(10,10,8,0.06) 65%,
         transparent 80%);
   }
-  /* In light mode the page is cream, but the video is high-contrast and
-     dark — soften the dark wash a touch more so it doesn't read as a
-     heavy black slab against the cream rest-of-page. */
+  /* In light mode the masthead should READ light — not just fade to cream
+     at the bottom. We tint the whole hero with a strong cream wash so the
+     video becomes a subtle texture peeking through, the bg color extends
+     cleanly into the sticky bar below, and the headline switches to dark
+     ink on cream. The video is muted/decorative; readability wins. */
+  .hero .hero-eyebrow { color: var(--ink-soft); border-color: var(--rule-strong); background: color-mix(in srgb, var(--bg) 80%, transparent); }
+  .hero h1 { color: var(--ink); text-shadow: 0 2px 14px color-mix(in srgb, var(--bg) 60%, transparent); }
+  .hero p.lede { color: var(--ink-soft); }
+  .hero p.lede b { color: var(--ink); }
+  .hero-meta { color: var(--ink-soft); }
+  .hero-meta b { color: var(--ink); }
+  .scroll-hint { color: var(--ink-mute); }
+
   @media (prefers-color-scheme: light) {
+    /* heavier cream tint: the video shows as a faint dotted texture, but
+       the bg color dominates so the hero blends into the rest of the page. */
+    .hero-overlay {
+      background:
+        linear-gradient(180deg,
+          color-mix(in srgb, var(--bg) 62%, transparent) 0%,
+          color-mix(in srgb, var(--bg) 70%, transparent) 35%,
+          color-mix(in srgb, var(--bg) 88%, transparent) 70%,
+          var(--bg) 100%);
+    }
+    /* solid-color fallback if the iframe hasn't loaded yet */
+    .hero { background: var(--bg); }
+  }
+
+  @media (prefers-color-scheme: dark) {
+    /* In dark mode the previous "dark wash + bottom fade" approach is right
+       — the video has high contrast against the dark page so we want the
+       wash to keep things legible and only soften at the very bottom. */
     .hero-overlay {
       background:
         linear-gradient(180deg,
           transparent 0%,
-          transparent 48%,
-          color-mix(in srgb, var(--bg) 55%, transparent) 70%,
-          color-mix(in srgb, var(--bg) 92%, transparent) 90%,
+          transparent 50%,
+          color-mix(in srgb, var(--bg) 45%, transparent) 72%,
+          color-mix(in srgb, var(--bg) 90%, transparent) 92%,
           var(--bg) 100%),
         linear-gradient(180deg,
-          rgba(10,10,8,0.40) 0%,
-          rgba(10,10,8,0.15) 40%,
-          transparent 70%);
+          rgba(10,10,8,0.55) 0%,
+          rgba(10,10,8,0.22) 40%,
+          rgba(10,10,8,0.06) 65%,
+          transparent 80%);
     }
+    /* In dark mode the page is dark; force light text on the hero so it
+       reads against the video. */
+    .hero .hero-eyebrow { color: #f3efe6; border-color: rgba(243,239,230,0.35); background: rgba(20,18,15,0.45); }
+    .hero h1 { color: #f9f6ee; text-shadow: 0 2px 18px rgba(0,0,0,0.45); }
+    .hero p.lede { color: #e8e2d3; text-shadow: 0 1px 12px rgba(0,0,0,0.5); }
+    .hero p.lede b { color: #faf9f5; }
+    .hero-meta { color: #d8d2c1; }
+    .hero-meta b { color: #faf9f5; }
+    .scroll-hint { color: #c9c3b2; }
   }
-  /* Force readable text-on-video colors regardless of system theme */
-  .hero .hero-eyebrow { color: #f3efe6; border-color: rgba(243,239,230,0.35); background: rgba(20,18,15,0.45); }
-  .hero h1 { color: #f9f6ee; text-shadow: 0 2px 18px rgba(0,0,0,0.45); }
-  .hero p.lede { color: #e8e2d3; text-shadow: 0 1px 12px rgba(0,0,0,0.5); }
-  .hero p.lede b { color: #faf9f5; }
-  .hero-meta { color: #d8d2c1; }
-  .hero-meta b { color: #faf9f5; }
-  .scroll-hint { color: #c9c3b2; }
   .hero-eyebrow { display: inline-flex; align-items: center; gap: .55rem; font-size: .78rem; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-soft); padding: .4rem .85rem; border: 1px solid var(--rule-strong); border-radius: 999px; background: color-mix(in srgb, var(--bg) 70%, transparent); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
   .hero-eyebrow .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 20%, transparent); animation: pulse 2s ease-in-out infinite; }
   @keyframes pulse { 0%,100%{box-shadow:0 0 0 0 color-mix(in srgb,var(--accent) 30%,transparent);} 50%{box-shadow:0 0 0 8px color-mix(in srgb,var(--accent) 0%,transparent);} }

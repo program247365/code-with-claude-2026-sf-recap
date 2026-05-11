@@ -1475,6 +1475,60 @@ const SLIDES = {
         "Report-structure tasks → LLM judge. Efficiency tasks → token-budget grader (95% out-tokens).",
         "Aggregate score = (PASS + ½·PASS-SLOW) / 12. Reference before/after starter: 63%–75%."
       ]
+    },
+    {
+      photo: "photos/IMG_1105.jpg",
+      title: "Three ways to give your agent a forecaster",
+      bullets: [
+        "Inline tool — Define a `spawn_subagent` tool; the main agent reads the history and computes via bash. Most surface area, hardest to debug.",
+        "Custom client tool — Dynamic prompts; works on any CMA harness, handles the call by creating a fresh session. Simpler plumbing; closest to Agent-SDK.",
+        "callable_agents — Native CMA primitive (launched yesterday). One level of delegation; 20-agent cap; persistent threads; parallelizable.",
+        "Pick by transport, not by ambition. If F2 (the eval) is still red, look at what the forecaster hands BACK to the orchestrator — that often matters more than which transport you picked."
+      ]
+    },
+    {
+      photo: "photos/IMG_1106.jpg",
+      title: "One agent. Five skills. Subagents only when a skill says so.",
+      bullets: [
+        "15 lines of system prompt · 5 skills loaded on demand · 0 hardcoded subagents · 92% eval score (11/12).",
+        "Architecture: StockPilot on Claude Managed Agents, model = claude-sonnet-4-6.",
+        "Skills: reorder-policy, supplier-selection, forecasting, notify-templates, weekly-report.",
+        "Agent toolset: bash + read + write. callable_agents → forecaster (CMA's multi-tenant primitive).",
+        "Net change vs. baseline: 12 inline tools → agent_toolset + 5 skills + callable_agents."
+      ]
+    }
+  ],
+
+  "sf-ext-agents-that-remember": [
+    {
+      photo: "photos/IMG_1095.jpg",
+      title: "Three-step structure",
+      bullets: [
+        "The problem — Sessions are silos. Every new conversation starts from zero.",
+        "Memory store — Attach a persistent store. The agent reads and writes across sessions — live recall.",
+        "Dreaming — Batch-consolidate past transcripts into structured memories. The agent improves from its own history."
+      ]
+    },
+    {
+      photo: "photos/IMG_1096.jpg",
+      title: "Core concepts — two new nouns",
+      bullets: [
+        "Agent — Model + system prompt + tool config. Reusable across sessions.",
+        "Environment — The container spec for a session. Also reusable.",
+        "Session — One conversation thread between a user and an agent.",
+        "Memory store — Persistent filesystem-like store. Attach as a `--resource` so the agent can read and write across sessions.",
+        "Dream — Async batch job that reads transcripts and stores, distills them, and writes a new memory store."
+      ]
+    },
+    {
+      photo: "photos/IMG_1097.jpg",
+      title: "What you'll learn",
+      bullets: [
+        "Diagnose the amnesia — see why isolated sessions limit agent usefulness.",
+        "Give an agent live memory — create a memory store, attach it as a session resource, and steer what gets written with the prompt field.",
+        "Consolidate history with Dreaming — run a dream over past transcripts, inspect the output store, and swap it into your next session.",
+        "Inspect it all in Console — read what the agent chose to remember, and compare memory stores side-by-side."
+      ]
     }
   ],
 
@@ -1506,6 +1560,37 @@ const SLIDES = {
         "Markdown plan (yesterday): a flat list of bullets under # Scope / ## Open questions / etc.",
         "HTML plan (today): SCOPE box (Even split · Tracking · Venmo), OPEN box (Tip · Currency · Auth), FLOW (Add bill → Split → Send).",
         "Same content, but the HTML version makes structure, scope edges, and unresolved questions visible at a glance."
+      ]
+    },
+    {
+      photo: "photos/IMG_1079.jpg",
+      title: "Code review on the PR — idempotency, line-by-line",
+      bullets: [
+        "Live PR review on `src/api/tasks.ts` adding an idempotency key around `http.patch('/tasks/$\{patch.id\}', patch)`.",
+        "Header sent: `'Idempotency-Key': key`. Key minted with `crypto.randomUUID()` per-call.",
+        "Reviewer flags: \"Generating the idempotency key as a default parameter means retries from the mutation layer get a new key each time, which defeats the purpose. The key should be minted once in `onMutate` and threaded through.\"",
+        "Suggested next step: add `await qc.cancelQueries(key)` at the top of `onMutate` in `useOptimisticTasks.ts`.",
+        "Other files in the PR are flagged SAFE (Toast.tsx, types/task.ts, TaskList.test.tsx) — focused review, not noise."
+      ]
+    },
+    {
+      photo: "photos/IMG_1080.jpg",
+      title: "Three principles",
+      bullets: [
+        "Build for it from the start — think of verification while you build, not as an afterthought.",
+        "Modularize by verifiability — group code by what's testable independently.",
+        "Verify across the stack — unit, integration, visual, behavioral."
+      ]
+    },
+    {
+      photo: "photos/IMG_1081.jpg",
+      title: "Verifiable React in action — replay the test fixtures",
+      bullets: [
+        "Live UI of the `Verifiable React — Todo` app at /verify/replay. Replay 18/21 fixtures auto-running.",
+        "Component `TodoList`: typed, whitespace-only, empty, populated, all-done, long-text — all ✓.",
+        "Component `TodoStats`: mixed, none-done, all-done all ✓; inconsistent-counts ✗ (caught by the runtime checker).",
+        "Feature `Todo App` fixtures: fresh, pre-seeded, add-then-verify, add-then-toggle — passing.",
+        "Per-fixture PASS badge with check-count and elapsed ms. The agent can introspect this state at runtime."
       ]
     }
   ],

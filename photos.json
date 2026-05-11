@@ -1,0 +1,472 @@
+[
+  {
+    "src": "photos/IMG_1064.jpg",
+    "day": 2,
+    "time": "09:20",
+    "tz": "-07:00",
+    "label": "Before the day began",
+    "lat": 37.77443,
+    "lng": -122.41981,
+    "size_kb": 425
+  },
+  {
+    "src": "photos/IMG_1065.jpg",
+    "day": 2,
+    "time": "09:22",
+    "tz": "-07:00",
+    "label": "Before the day began",
+    "lat": 37.77417,
+    "lng": -122.41992,
+    "size_kb": 319
+  },
+  {
+    "src": "photos/IMG_1066.jpg",
+    "day": 2,
+    "time": "09:22",
+    "tz": "-07:00",
+    "label": "Before the day began",
+    "lat": 37.77441,
+    "lng": -122.41991,
+    "size_kb": 364
+  },
+  {
+    "src": "photos/IMG_1068.jpg",
+    "day": 2,
+    "time": "09:31",
+    "tz": "-07:00",
+    "label": "During: Community general session \u2014 Boris Cherny",
+    "lat": 37.77419,
+    "lng": -122.41988,
+    "size_kb": 321
+  },
+  {
+    "src": "photos/IMG_1069.jpg",
+    "day": 2,
+    "time": "09:31",
+    "tz": "-07:00",
+    "label": "During: Community general session \u2014 Boris Cherny",
+    "lat": 37.77461,
+    "lng": -122.41988,
+    "size_kb": 730
+  },
+  {
+    "src": "photos/IMG_1070.jpg",
+    "day": 2,
+    "time": "09:31",
+    "tz": "-07:00",
+    "label": "During: Community general session \u2014 Boris Cherny",
+    "lat": 37.77435,
+    "lng": -122.41986,
+    "size_kb": 329
+  },
+  {
+    "src": "photos/IMG_1071.jpg",
+    "day": 2,
+    "time": "09:33",
+    "tz": "-07:00",
+    "label": "During: Community general session \u2014 Boris Cherny",
+    "lat": 37.77446,
+    "lng": -122.41971,
+    "size_kb": 229
+  },
+  {
+    "src": "photos/IMG_1072.jpg",
+    "day": 2,
+    "time": "09:36",
+    "tz": "-07:00",
+    "label": "During: Community general session \u2014 Boris Cherny",
+    "lat": 37.77447,
+    "lng": -122.41986,
+    "size_kb": 236
+  },
+  {
+    "src": "photos/IMG_1073.jpg",
+    "day": 2,
+    "time": "09:39",
+    "tz": "-07:00",
+    "label": "During: Community general session \u2014 Boris Cherny",
+    "lat": 37.77432,
+    "lng": -122.41995,
+    "size_kb": 411
+  },
+  {
+    "src": "photos/IMG_1074.jpg",
+    "day": 2,
+    "time": "09:58",
+    "tz": "-07:00",
+    "label": "During: Community general session \u2014 Boris Cherny",
+    "lat": 37.77376,
+    "lng": -122.41924,
+    "size_kb": 339
+  },
+  {
+    "src": "photos/IMG_1077.jpg",
+    "day": 2,
+    "time": "10:06",
+    "tz": "-07:00",
+    "label": "During: Do agents dream of data models? \u00b7 Claude and Sol \u00b7 How we Claude Code",
+    "lat": 37.77415,
+    "lng": -122.41914,
+    "size_kb": 258
+  },
+  {
+    "src": "photos/IMG_1078.jpg",
+    "day": 2,
+    "time": "10:16",
+    "tz": "-07:00",
+    "label": "During: Do agents dream of data models? \u00b7 Claude and Sol \u00b7 How we Claude Code",
+    "lat": 37.77389,
+    "lng": -122.41919,
+    "size_kb": 277
+  },
+  {
+    "src": "photos/IMG_1079.jpg",
+    "day": 2,
+    "time": "10:27",
+    "tz": "-07:00",
+    "label": "During: Do agents dream of data models? \u00b7 Claude and Sol \u00b7 How we Claude Code",
+    "lat": 37.77403,
+    "lng": -122.41916,
+    "size_kb": 287
+  },
+  {
+    "src": "photos/IMG_1080.jpg",
+    "day": 2,
+    "time": "10:31",
+    "tz": "-07:00",
+    "label": "During: Do agents dream of data models? \u00b7 Claude and Sol \u00b7 How we Claude Code",
+    "lat": 37.77405,
+    "lng": -122.41909,
+    "size_kb": 250
+  },
+  {
+    "src": "photos/IMG_1081.jpg",
+    "day": 2,
+    "time": "10:36",
+    "tz": "-07:00",
+    "label": "During: Do agents dream of data models? \u00b7 Claude and Sol \u00b7 How we Claude Code",
+    "lat": 37.77391,
+    "lng": -122.41914,
+    "size_kb": 259
+  },
+  {
+    "src": "photos/IMG_1082.jpg",
+    "day": 2,
+    "time": "10:47",
+    "tz": "-07:00",
+    "label": "During: Designing multi-agent systems \u00b7 postvisit.ai",
+    "lat": 37.77415,
+    "lng": -122.41899,
+    "size_kb": 681
+  },
+  {
+    "src": "photos/IMG_1083.jpg",
+    "day": 2,
+    "time": "11:26",
+    "tz": "-07:00",
+    "label": "During: Ship your first Managed Agent",
+    "lat": 37.77438,
+    "lng": -122.42025,
+    "size_kb": 325
+  },
+  {
+    "src": "photos/IMG_1085.jpg",
+    "day": 2,
+    "time": "11:30",
+    "tz": "-07:00",
+    "label": "During: Building AI-native \u00b7 Evals for subjective, stateful agents",
+    "lat": 37.77449,
+    "lng": -122.42009,
+    "size_kb": 346
+  },
+  {
+    "src": "photos/IMG_1086.jpg",
+    "day": 2,
+    "time": "11:38",
+    "tz": "-07:00",
+    "label": "During: Building AI-native \u00b7 Evals for subjective, stateful agents",
+    "lat": 37.77424,
+    "lng": -122.42029,
+    "size_kb": 429
+  },
+  {
+    "src": "photos/IMG_1087.jpg",
+    "day": 2,
+    "time": "11:40",
+    "tz": "-07:00",
+    "label": "During: Building AI-native \u00b7 Evals for subjective, stateful agents",
+    "lat": 37.77422,
+    "lng": -122.42039,
+    "size_kb": 305
+  },
+  {
+    "src": "photos/IMG_1088.jpg",
+    "day": 2,
+    "time": "11:42",
+    "tz": "-07:00",
+    "label": "During: Building AI-native \u00b7 Evals for subjective, stateful agents",
+    "lat": 37.77444,
+    "lng": -122.4202,
+    "size_kb": 292
+  },
+  {
+    "src": "photos/IMG_1089.jpg",
+    "day": 2,
+    "time": "11:44",
+    "tz": "-07:00",
+    "label": "During: Building AI-native \u00b7 Evals for subjective, stateful agents",
+    "lat": 37.77452,
+    "lng": -122.42014,
+    "size_kb": 407
+  },
+  {
+    "src": "photos/IMG_1090.jpg",
+    "day": 2,
+    "time": "11:46",
+    "tz": "-07:00",
+    "label": "During: Building AI-native \u00b7 Evals for subjective, stateful agents",
+    "lat": 37.77437,
+    "lng": -122.42025,
+    "size_kb": 378
+  },
+  {
+    "src": "photos/IMG_1091.jpg",
+    "day": 2,
+    "time": "11:47",
+    "tz": "-07:00",
+    "label": "During: Building AI-native \u00b7 Evals for subjective, stateful agents",
+    "lat": 37.77457,
+    "lng": -122.41995,
+    "size_kb": 371
+  },
+  {
+    "src": "photos/IMG_1092.jpg",
+    "day": 2,
+    "time": "11:58",
+    "tz": "-07:00",
+    "label": "During: Building AI-native \u00b7 Evals for subjective, stateful agents",
+    "lat": 37.77391,
+    "lng": -122.41917,
+    "size_kb": 379
+  },
+  {
+    "src": "photos/IMG_1093.jpg",
+    "day": 2,
+    "time": "11:58",
+    "tz": "-07:00",
+    "label": "During: Building AI-native \u00b7 Evals for subjective, stateful agents",
+    "lat": 37.77391,
+    "lng": -122.41917,
+    "size_kb": 453
+  },
+  {
+    "src": "photos/IMG_1094.jpg",
+    "day": 2,
+    "time": "12:00",
+    "tz": "-07:00",
+    "label": "During: Agents that remember",
+    "lat": 37.77388,
+    "lng": -122.41918,
+    "size_kb": 339
+  },
+  {
+    "src": "photos/IMG_1095.jpg",
+    "day": 2,
+    "time": "12:02",
+    "tz": "-07:00",
+    "label": "During: Agents that remember",
+    "lat": 37.77138,
+    "lng": -122.41806,
+    "size_kb": 399
+  },
+  {
+    "src": "photos/IMG_1096.jpg",
+    "day": 2,
+    "time": "12:04",
+    "tz": "-07:00",
+    "label": "During: Agents that remember",
+    "lat": 37.77368,
+    "lng": -122.41972,
+    "size_kb": 426
+  },
+  {
+    "src": "photos/IMG_1097.jpg",
+    "day": 2,
+    "time": "12:06",
+    "tz": "-07:00",
+    "label": "During: Agents that remember",
+    "lat": 37.77393,
+    "lng": -122.41922,
+    "size_kb": 209
+  },
+  {
+    "src": "photos/IMG_1067.jpg",
+    "day": 2,
+    "time": "12:31",
+    "tz": "-04:00",
+    "label": "During: Agents that remember",
+    "lat": 37.77412,
+    "lng": -122.41993,
+    "size_kb": 534
+  },
+  {
+    "src": "photos/IMG_1100.jpg",
+    "day": 2,
+    "time": "13:01",
+    "tz": "-07:00",
+    "label": "During: Evals for Taste \u2014 Felix Becker",
+    "lat": 37.77404,
+    "lng": -122.41939,
+    "size_kb": 605
+  },
+  {
+    "src": "photos/IMG_1101.jpg",
+    "day": 2,
+    "time": "13:04",
+    "tz": "-07:00",
+    "label": "During: Evals for Taste \u2014 Felix Becker",
+    "lat": 37.77403,
+    "lng": -122.41918,
+    "size_kb": 514
+  },
+  {
+    "src": "photos/IMG_1102.jpg",
+    "day": 2,
+    "time": "13:58",
+    "tz": "-07:00",
+    "label": "During: Measure twice, cut once \u00b7 13 years to 24 hours",
+    "lat": 37.77403,
+    "lng": -122.41918,
+    "size_kb": 721
+  },
+  {
+    "src": "photos/IMG_1103.jpg",
+    "day": 2,
+    "time": "14:02",
+    "tz": "-07:00",
+    "label": "During: Tool, skill, or subagent? \u2014 Tanveer Mittal",
+    "lat": 37.77411,
+    "lng": -122.41938,
+    "size_kb": 442
+  },
+  {
+    "src": "photos/IMG_1104.jpg",
+    "day": 2,
+    "time": "14:03",
+    "tz": "-07:00",
+    "label": "During: Tool, skill, or subagent? \u2014 Tanveer Mittal",
+    "lat": 37.77399,
+    "lng": -122.41945,
+    "size_kb": 484
+  },
+  {
+    "src": "photos/IMG_1105.jpg",
+    "day": 2,
+    "time": "14:23",
+    "tz": "-07:00",
+    "label": "During: Listen first. Then, keep thinking \u00b7 Coherence at Claude Code speed",
+    "lat": 37.77404,
+    "lng": -122.41934,
+    "size_kb": 745
+  },
+  {
+    "src": "photos/IMG_1106.jpg",
+    "day": 2,
+    "time": "14:31",
+    "tz": "-07:00",
+    "label": "During: Listen first. Then, keep thinking \u00b7 Coherence at Claude Code speed",
+    "lat": 37.7739,
+    "lng": -122.41921,
+    "size_kb": 531
+  },
+  {
+    "src": "photos/IMG_1107.jpg",
+    "day": 2,
+    "time": "14:44",
+    "tz": "-07:00",
+    "label": "During: Listen first. Then, keep thinking \u00b7 Coherence at Claude Code speed",
+    "lat": 37.77402,
+    "lng": -122.41938,
+    "size_kb": 386
+  },
+  {
+    "src": "photos/IMG_1108.jpg",
+    "day": 2,
+    "time": "14:50",
+    "tz": "-07:00",
+    "label": "During: Claude can code \u00b7 Era Online",
+    "lat": 37.77409,
+    "lng": -122.41899,
+    "size_kb": 368
+  },
+  {
+    "src": "photos/IMG_1110.jpg",
+    "day": 2,
+    "time": "15:18",
+    "tz": "-07:00",
+    "label": "During: Agent Battle \u2014 Matt Roknich",
+    "lat": 37.77455,
+    "lng": -122.42018,
+    "size_kb": 383
+  },
+  {
+    "src": "photos/IMG_1111.jpg",
+    "day": 2,
+    "time": "15:30",
+    "tz": "-07:00",
+    "label": "During: Agent Battle \u2014 Matt Roknich",
+    "lat": 37.77427,
+    "lng": -122.41971,
+    "size_kb": 300
+  },
+  {
+    "src": "photos/IMG_1112.jpg",
+    "day": 2,
+    "time": "15:37",
+    "tz": "-07:00",
+    "label": "During: Claude & the self-driving company \u2014 Nicolai Ouporov",
+    "lat": 37.77429,
+    "lng": -122.41961,
+    "size_kb": 371
+  },
+  {
+    "src": "photos/IMG_1113.jpg",
+    "day": 2,
+    "time": "15:42",
+    "tz": "-07:00",
+    "label": "During: Claude & the self-driving company \u2014 Nicolai Ouporov",
+    "lat": 37.77389,
+    "lng": -122.41925,
+    "size_kb": 537
+  },
+  {
+    "src": "photos/IMG_1117.jpg",
+    "day": 2,
+    "time": "19:10",
+    "tz": "-07:00",
+    "label": "Between sessions \u00b7 after Claude & the self-driving company \u2014 Nicolai Ouporov",
+    "lat": 37.77736,
+    "lng": -122.41952,
+    "size_kb": 319
+  },
+  {
+    "src": "photos/IMG_1118.jpg",
+    "day": 2,
+    "time": "19:16",
+    "tz": "-07:00",
+    "label": "Between sessions \u00b7 after Claude & the self-driving company \u2014 Nicolai Ouporov",
+    "lat": 37.77853,
+    "lng": -122.41977,
+    "size_kb": 511
+  },
+  {
+    "src": "photos/IMG_1122.jpg",
+    "day": 2,
+    "time": "19:40",
+    "tz": "-07:00",
+    "label": "Between sessions \u00b7 after Claude & the self-driving company \u2014 Nicolai Ouporov",
+    "lat": 37.79948,
+    "lng": -122.43589,
+    "size_kb": 610
+  }
+]

@@ -1,0 +1,1515 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Code with Claude · SF 2026 — Interactive Timeline</title>
+<meta name="description" content="An unofficial interactive recap of Code with Claude San Francisco (May 6, 2026) and the Extended workshop day (May 7, 2026). Talks, workshops, announcements, and video embeds.">
+<meta property="og:title" content="Code with Claude · SF 2026 — Interactive Timeline">
+<meta property="og:description" content="Talks, workshops, and announcements from Code with Claude SF 2026.">
+<meta property="og:type" content="website">
+<link rel="icon" type="image/svg+xml" href="claude-splat.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #faf9f5; --bg-dim: #f3efe6;
+    --ink: #1f1e1c; --ink-soft: #4a4742; --ink-mute: #7d7872;
+    --rule: #e6e0d3; --rule-strong: #d4ccb9;
+    --accent: #cc785c; --accent-deep: #a85a3f; --accent-soft: #f1d7c9;
+    --gold: #d9a441; --plum: #4a3a52; --teal: #3d6b6b;
+    --shadow-sm: 0 1px 2px rgba(31,30,28,0.06), 0 1px 1px rgba(31,30,28,0.04);
+    --shadow-md: 0 8px 28px -8px rgba(31,30,28,0.18), 0 2px 6px rgba(31,30,28,0.06);
+    --shadow-lg: 0 32px 80px -16px rgba(31,30,28,0.32), 0 8px 24px rgba(31,30,28,0.12);
+    --r-sm: 6px; --r-md: 12px; --r-lg: 18px;
+    --serif: 'Fraunces', 'Tiempos Headline', Georgia, 'Times New Roman', serif;
+    --sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    --mono: 'JetBrains Mono', 'SF Mono', ui-monospace, Menlo, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #1a1815; --bg-dim: #221f1b;
+      --ink: #f3efe6; --ink-soft: #c9c3b6; --ink-mute: #8a857c;
+      --rule: #2e2a25; --rule-strong: #3d3833;
+      --accent-soft: #3a2620;
+      --shadow-sm: 0 1px 2px rgba(0,0,0,0.4);
+      --shadow-md: 0 8px 28px -8px rgba(0,0,0,0.6), 0 2px 6px rgba(0,0,0,0.3);
+      --shadow-lg: 0 32px 80px -16px rgba(0,0,0,0.7), 0 8px 24px rgba(0,0,0,0.4);
+    }
+  }
+  *,*::before,*::after { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body { font-family: var(--sans); color: var(--ink); background: var(--bg); -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; line-height: 1.55; overflow-x: hidden; }
+  a { color: var(--accent-deep); text-decoration: none; border-bottom: 1px solid transparent; transition: border-color .15s ease; }
+  a:hover { border-color: var(--accent-deep); }
+  button { font-family: inherit; cursor: pointer; border: 0; background: none; color: inherit; }
+  img, svg { display: block; max-width: 100%; }
+
+  .hero { position: relative; isolation: isolate; min-height: 78vh; display: grid; place-items: center; text-align: center; padding: 6rem 1.5rem 4rem; overflow: hidden; background: #0a0a08; }
+  /* live Claude FM stream as the masthead background.
+     Scale up to push YT chrome (title bar, watermark) off-screen. */
+  .hero-video {
+    position: absolute;
+    inset: -8% -10%;
+    width: 120%;
+    height: 116%;
+    border: 0;
+    z-index: -2;
+    pointer-events: none;
+    transform: scale(1.18);
+    transform-origin: center;
+    opacity: 0;
+    transition: opacity 1.2s ease;
+  }
+  .hero-video.ready { opacity: .85; }
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background:
+      radial-gradient(120% 80% at 50% 100%, var(--bg) 0%, color-mix(in srgb, var(--bg) 70%, transparent) 35%, transparent 75%),
+      linear-gradient(180deg, rgba(10,10,8,0.55) 0%, rgba(10,10,8,0.15) 35%, rgba(10,10,8,0.55) 100%);
+  }
+  /* Force readable text-on-video colors regardless of system theme */
+  .hero .hero-eyebrow { color: #f3efe6; border-color: rgba(243,239,230,0.35); background: rgba(20,18,15,0.45); }
+  .hero h1 { color: #f9f6ee; text-shadow: 0 2px 18px rgba(0,0,0,0.45); }
+  .hero p.lede { color: #e8e2d3; text-shadow: 0 1px 12px rgba(0,0,0,0.5); }
+  .hero p.lede b { color: #faf9f5; }
+  .hero-meta { color: #d8d2c1; }
+  .hero-meta b { color: #faf9f5; }
+  .scroll-hint { color: #c9c3b2; }
+  .hero-eyebrow { display: inline-flex; align-items: center; gap: .55rem; font-size: .78rem; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-soft); padding: .4rem .85rem; border: 1px solid var(--rule-strong); border-radius: 999px; background: color-mix(in srgb, var(--bg) 70%, transparent); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
+  .hero-eyebrow .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 20%, transparent); animation: pulse 2s ease-in-out infinite; }
+  @keyframes pulse { 0%,100%{box-shadow:0 0 0 0 color-mix(in srgb,var(--accent) 30%,transparent);} 50%{box-shadow:0 0 0 8px color-mix(in srgb,var(--accent) 0%,transparent);} }
+  .hero h1 { font-family: var(--serif); font-weight: 500; font-size: clamp(2.4rem, 6.5vw, 5.2rem); line-height: 1.02; letter-spacing: -.025em; margin: 1.4rem 0 1rem; max-width: 16ch; }
+  .hero h1 em { font-style: italic; color: var(--accent); font-weight: 400; }
+  .hero p.lede { font-size: clamp(1rem, 1.6vw, 1.2rem); color: var(--ink-soft); max-width: 56ch; margin: 0 auto 2rem; }
+  .hero-meta { display: flex; flex-wrap: wrap; gap: 1.4rem 2rem; justify-content: center; font-size: .9rem; color: var(--ink-soft); }
+  .hero-meta b { color: var(--ink); font-weight: 600; margin-right: .4rem; }
+  .scroll-hint { position: absolute; bottom: 1.6rem; left: 50%; transform: translateX(-50%); font-size: .72rem; letter-spacing: .2em; text-transform: uppercase; color: var(--ink-mute); opacity: .8; animation: float 3s ease-in-out infinite; }
+  @keyframes float { 0%,100%{transform:translate(-50%,0);} 50%{transform:translate(-50%,6px);} }
+
+  .stickybar { position: sticky; top: 0; z-index: 30; background: color-mix(in srgb, var(--bg) 86%, transparent); backdrop-filter: blur(16px) saturate(140%); -webkit-backdrop-filter: blur(16px) saturate(140%); border-bottom: 1px solid var(--rule); }
+  .stickybar-inner { max-width: 1100px; margin: 0 auto; padding: .9rem 1.5rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+  .brand { display: flex; align-items: center; gap: .65rem; font-family: var(--serif); font-weight: 500; font-size: 1.05rem; letter-spacing: -.01em; }
+  .brand-glyph { width: 26px; height: 26px; display: grid; place-items: center; color: var(--accent); flex-shrink: 0; }
+  .brand-glyph svg { width: 22px; height: 22px; }
+  .tabs { display: inline-flex; padding: 4px; background: var(--bg-dim); border: 1px solid var(--rule); border-radius: 999px; position: relative; }
+  .tab { position: relative; padding: .55rem 1.1rem; font-size: .88rem; font-weight: 500; color: var(--ink-soft); border-radius: 999px; transition: color .2s ease; z-index: 1; white-space: nowrap; }
+  .tab[aria-selected="true"] { color: var(--ink); }
+  .tab-indicator { position: absolute; top: 4px; bottom: 4px; background: var(--bg); border-radius: 999px; box-shadow: var(--shadow-sm); transition: left .35s cubic-bezier(.34,1.1,.4,1), width .35s cubic-bezier(.34,1.1,.4,1); z-index: 0; }
+  .stickybar-right { display: flex; align-items: center; gap: .7rem; }
+  .more-link {
+    display: inline-flex;
+    align-items: center;
+    gap: .4rem;
+    padding: .5rem .8rem;
+    border-radius: 999px;
+    font-size: .82rem;
+    font-weight: 500;
+    color: var(--ink-soft);
+    border: 1px solid var(--rule);
+    background: var(--bg);
+    transition: border-color .2s ease, color .2s ease, background .2s ease, transform .2s ease;
+    white-space: nowrap;
+  }
+  .more-link:hover {
+    border-color: var(--accent);
+    color: var(--accent-deep);
+    background: var(--accent-soft);
+    transform: translateY(-1px);
+  }
+  .more-link svg { transition: transform .25s ease; }
+  .more-link:hover svg { transform: translate(2px, -2px); }
+  @media (max-width: 760px) {
+    .more-link span { display: none; }
+    .more-link { padding: .5rem; }
+  }
+
+  section.shell { max-width: 1100px; margin: 0 auto; padding: 5rem 1.5rem; }
+  .section-head { display: flex; align-items: baseline; justify-content: space-between; gap: 2rem; flex-wrap: wrap; margin-bottom: 3rem; }
+  .section-head h2 { font-family: var(--serif); font-weight: 500; font-size: clamp(1.8rem, 3.6vw, 2.8rem); letter-spacing: -.02em; margin: 0; line-height: 1.1; }
+  .section-head .meta { color: var(--ink-mute); font-size: .9rem; font-family: var(--mono); }
+
+  .timeline { position: relative; padding: 1rem 0; }
+  .timeline::before { content: ""; position: absolute; top: 0; bottom: 0; left: 50%; width: 2px; background: linear-gradient(180deg, transparent, var(--rule-strong) 8%, var(--rule-strong) 92%, transparent); transform: translateX(-50%); }
+  .tl-item { position: relative; display: grid; grid-template-columns: 1fr 56px 1fr; gap: 0; align-items: center; padding: 1.25rem 0; }
+  .tl-spine { grid-column: 2; display: grid; place-items: center; position: relative; }
+  .tl-dot { width: 18px; height: 18px; border-radius: 50%; background: var(--bg); border: 2px solid var(--accent); box-shadow: 0 0 0 6px color-mix(in srgb, var(--accent) 14%, transparent); transition: transform .25s ease; z-index: 1; }
+  .tl-time { font-family: var(--mono); font-size: .72rem; color: var(--ink-mute); letter-spacing: .04em; margin-top: .35rem; text-align: center; white-space: nowrap; }
+
+  .tl-card { grid-column: 1; text-align: right; padding-right: 2rem; opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s cubic-bezier(.34,1.1,.4,1); }
+  .tl-item:nth-child(even) .tl-card { grid-column: 3; text-align: left; padding-right: 0; padding-left: 2rem; transform: translateY(24px); }
+  .tl-card.in { opacity: 1; transform: translateY(0); }
+
+  .card { display: inline-block; text-align: left; background: var(--bg); border: 1px solid var(--rule); border-radius: var(--r-lg); padding: 1.5rem 1.6rem; box-shadow: var(--shadow-sm); cursor: pointer; transition: transform .25s cubic-bezier(.34,1.1,.4,1), box-shadow .25s ease, border-color .25s ease; max-width: 100%; width: 100%; }
+  .card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); border-color: var(--rule-strong); }
+  .card:hover .play-bubble { transform: scale(1.08); background: var(--accent); color: var(--bg); }
+  .card-top { display: flex; align-items: flex-start; gap: 1rem; justify-content: space-between; margin-bottom: .85rem; }
+  .pill { display: inline-flex; align-items: center; gap: .35rem; font-size: .68rem; font-weight: 600; text-transform: uppercase; letter-spacing: .1em; padding: .28rem .6rem; border-radius: 999px; background: var(--accent-soft); color: var(--accent-deep); }
+  .pill.workshop { background: color-mix(in srgb, var(--teal) 14%, transparent); color: var(--teal); }
+  .pill.keynote { background: color-mix(in srgb, var(--gold) 18%, transparent); color: #8a6614; }
+  .pill.officehours { background: color-mix(in srgb, var(--plum) 14%, transparent); color: var(--plum); }
+  .pill.announce { background: linear-gradient(135deg, var(--accent), var(--accent-deep)); color: var(--bg); }
+
+  .play-bubble { width: 38px; height: 38px; border-radius: 50%; background: var(--bg-dim); color: var(--accent-deep); display: grid; place-items: center; transition: transform .25s ease, background .25s ease, color .25s ease; flex-shrink: 0; }
+  .play-bubble.unposted { background: var(--bg-dim); color: var(--ink-mute); }
+  .play-bubble.unposted svg { opacity: .55; }
+
+  .card h3 { font-family: var(--serif); font-weight: 500; font-size: 1.32rem; line-height: 1.18; letter-spacing: -.01em; margin: 0 0 .55rem; color: var(--ink); }
+  .card .speaker { font-size: .9rem; color: var(--ink-soft); margin: 0 0 .9rem; }
+  .card .speaker b { color: var(--ink); font-weight: 600; }
+  .card .summary { font-size: .92rem; color: var(--ink-soft); margin: 0 0 1rem; line-height: 1.55; }
+  .card .tags { display: flex; flex-wrap: wrap; gap: .35rem; }
+  .card .tag { font-size: .7rem; font-family: var(--mono); color: var(--ink-mute); padding: .2rem .55rem; border-radius: var(--r-sm); background: var(--bg-dim); border: 1px solid var(--rule); }
+  .card .unposted-flag { display: inline-flex; align-items: center; gap: .4rem; font-size: .75rem; font-family: var(--mono); color: var(--ink-mute); margin-top: .65rem; }
+  .card .unposted-flag::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--ink-mute); }
+
+  /* ────────── polaroid photos on the timeline ────────── */
+  .tl-photos {
+    grid-column: 3;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding-left: 1.4rem;
+  }
+  .tl-item:nth-child(even) .tl-photos {
+    grid-column: 1;
+    justify-content: flex-end;
+    padding-left: 0;
+    padding-right: 1.4rem;
+  }
+  .polaroid {
+    --rot: -2.5deg;
+    position: relative;
+    background: #f6f1e6;
+    padding: 10px 10px 14px;
+    border-radius: 2px;
+    box-shadow:
+      0 1px 0 rgba(0,0,0,0.05) inset,
+      0 8px 22px -6px rgba(31,30,28,0.32),
+      0 2px 6px rgba(31,30,28,0.12);
+    transform: rotate(var(--rot));
+    transition: transform .3s cubic-bezier(.34,1.1,.4,1), box-shadow .3s ease, z-index 0s linear .3s;
+    cursor: zoom-in;
+    width: 210px;
+    flex-shrink: 0;
+  }
+  .polaroid:hover {
+    transform: rotate(0) scale(1.06) translateY(-4px);
+    box-shadow:
+      0 1px 0 rgba(0,0,0,0.06) inset,
+      0 16px 40px -8px rgba(31,30,28,0.45),
+      0 4px 10px rgba(31,30,28,0.18);
+    z-index: 5;
+    transition-delay: 0s;
+  }
+  .polaroid img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    background: #1a1815;
+    display: block;
+  }
+  .polaroid-caption {
+    padding: .55rem .15rem 0;
+    font-size: .78rem;
+    color: #2a2723;
+    line-height: 1.32;
+    text-align: center;
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 500;
+  }
+  .polaroid-caption .time {
+    display: block;
+    font-family: var(--mono);
+    font-size: .65rem;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: #6b6356;
+    font-style: normal;
+    margin-bottom: .15rem;
+  }
+  .polaroid-caption .where { display: block; opacity: .85; }
+  .polaroid-credit {
+    margin-top: .5rem;
+    font-family: var(--mono);
+    font-size: .58rem;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: #8a8174;
+    font-style: normal;
+  }
+  .polaroid-stack-badge {
+    position: absolute;
+    top: 6px; right: 6px;
+    background: var(--ink);
+    color: var(--bg);
+    font-family: var(--mono);
+    font-size: .65rem;
+    font-weight: 500;
+    padding: .25rem .5rem;
+    border-radius: 999px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+  }
+
+  /* lightbox for expanding photo stacks */
+  .lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 110;
+    background: rgba(10,8,5,0.86);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    display: grid;
+    place-items: center;
+    padding: 2rem;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .25s ease;
+  }
+  .lightbox.open { opacity: 1; pointer-events: auto; }
+  .lightbox-frame {
+    width: min(1100px, 100%);
+    max-height: 90vh;
+    display: grid;
+    grid-template-rows: 1fr auto;
+    gap: 1rem;
+    transform: scale(.96);
+    transition: transform .35s cubic-bezier(.34,1.1,.4,1);
+  }
+  .lightbox.open .lightbox-frame { transform: scale(1); }
+  .lightbox-img {
+    width: 100%;
+    height: 100%;
+    max-height: calc(90vh - 100px);
+    object-fit: contain;
+    border-radius: var(--r-md);
+    background: #000;
+  }
+  .lightbox-info {
+    color: #f3efe6;
+    text-align: center;
+    font-size: .9rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0 1rem;
+  }
+  .lightbox-info .meta { font-family: var(--mono); font-size: .75rem; opacity: .8; letter-spacing: .04em; }
+  .lightbox-nav {
+    display: inline-flex;
+    gap: .5rem;
+  }
+  .lightbox-btn {
+    width: 38px; height: 38px;
+    border-radius: 50%;
+    background: rgba(250,249,245,0.1);
+    color: #faf9f5;
+    display: grid;
+    place-items: center;
+    transition: background .2s ease, transform .2s ease;
+  }
+  .lightbox-btn:hover { background: rgba(250,249,245,0.22); }
+  .lightbox-btn:active { transform: scale(0.94); }
+  .lightbox-close {
+    position: absolute;
+    top: 1.2rem;
+    right: 1.4rem;
+  }
+
+  @media (max-width: 760px) {
+    .tl-photos, .tl-item:nth-child(even) .tl-photos {
+      grid-column: 2;
+      padding: .5rem 0 0 .9rem;
+      justify-content: flex-start;
+    }
+    .polaroid { width: 168px; }
+    .polaroid img { height: 150px; }
+  }
+
+  /* ────────── announcements ────────── */
+  .announcements { padding-top: 4rem; padding-bottom: 4rem; }
+  .ann-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 1rem;
+    margin-top: 2.4rem;
+  }
+  .ann {
+    grid-column: span 2;
+    background: var(--bg);
+    border: 1px solid var(--rule);
+    border-radius: var(--r-lg);
+    padding: 1.6rem 1.6rem 1.5rem;
+    transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    color: inherit;
+    text-decoration: none;
+    border-bottom: 1px solid var(--rule); /* override anchor underline behavior */
+  }
+  .ann:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--rule-strong);
+  }
+  .ann:hover h3 { color: var(--accent-deep); }
+  .ann .ext {
+    margin-top: auto;
+    padding-top: 1rem;
+    font-family: var(--mono);
+    font-size: .7rem;
+    color: var(--ink-mute);
+    letter-spacing: .05em;
+    display: inline-flex;
+    align-items: center;
+    gap: .35rem;
+  }
+  .ann:hover .ext { color: var(--accent-deep); }
+  .ann.featured {
+    grid-column: span 6;
+    background:
+      radial-gradient(80% 100% at 90% 0%, color-mix(in srgb, var(--accent) 22%, transparent), transparent 60%),
+      var(--bg);
+    border-color: var(--accent);
+    border-width: 1.5px;
+  }
+  .ann.featured h3 {
+    font-size: clamp(1.6rem, 2.6vw, 2.1rem);
+    max-width: 22ch;
+  }
+  .ann.featured p { font-size: 1.02rem; max-width: 62ch; }
+  .ann-tag {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: .68rem;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--accent-deep);
+    background: var(--accent-soft);
+    padding: .25rem .55rem;
+    border-radius: var(--r-sm);
+    margin-bottom: 1rem;
+  }
+  .ann h3 {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: 1.3rem;
+    line-height: 1.18;
+    letter-spacing: -.01em;
+    margin: 0 0 .65rem;
+    color: var(--ink);
+  }
+  .ann p {
+    font-size: .92rem;
+    line-height: 1.6;
+    color: var(--ink-soft);
+    margin: 0;
+  }
+  .ann-meta {
+    display: flex;
+    align-items: center;
+    gap: .9rem;
+    margin-top: 1.2rem;
+    font-family: var(--mono);
+    font-size: .72rem;
+    color: var(--ink-mute);
+    letter-spacing: .04em;
+  }
+  .ann-meta .pip {
+    width: 4px; height: 4px; border-radius: 50%;
+    background: var(--accent);
+  }
+  .ann-source {
+    margin-top: 2rem;
+    font-family: var(--mono);
+    font-size: .76rem;
+    color: var(--ink-mute);
+    text-align: center;
+  }
+  .ann-source a { color: var(--ink-soft); }
+  @media (max-width: 900px) {
+    .ann-grid { grid-template-columns: repeat(2, 1fr); }
+    .ann, .ann.featured { grid-column: span 2; }
+  }
+  @media (max-width: 560px) {
+    .ann-grid { grid-template-columns: 1fr; }
+    .ann, .ann.featured { grid-column: span 1; }
+  }
+
+  .highlights { background: var(--bg-dim); border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
+  .highlights .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.5rem; margin-top: 2rem; }
+  .hl { background: var(--bg); border: 1px solid var(--rule); border-radius: var(--r-md); padding: 1.4rem; transition: transform .25s ease, box-shadow .25s ease; }
+  .hl:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+  .hl .num { font-family: var(--serif); font-size: 2rem; line-height: 1; color: var(--accent); font-weight: 500; margin-bottom: .55rem; }
+  .hl .label { font-size: .85rem; color: var(--ink-soft); }
+
+  footer { padding: 4rem 1.5rem 3rem; text-align: center; color: var(--ink-mute); font-size: .85rem; border-top: 1px solid var(--rule); }
+  footer .links { display: flex; flex-wrap: wrap; gap: 1.5rem; justify-content: center; margin-bottom: 1.2rem; }
+  footer .links a { color: var(--ink-soft); border: 0; }
+  footer .fine { font-size: .76rem; max-width: 60ch; margin: 0 auto; }
+
+  .modal-backdrop { position: fixed; inset: 0; z-index: 100; background: rgba(31,30,28,0.62); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); opacity: 0; pointer-events: none; transition: opacity .25s ease; display: grid; place-items: center; padding: 2rem 1rem; }
+  .modal-backdrop.open { opacity: 1; pointer-events: auto; }
+  .modal { background: var(--bg); border: 1px solid var(--rule); border-radius: var(--r-lg); box-shadow: var(--shadow-lg); width: min(960px, 100%); max-height: 90vh; overflow: auto; transform: scale(.94) translateY(20px); opacity: 0; transition: transform .35s cubic-bezier(.34,1.1,.4,1), opacity .25s ease; position: relative; }
+  .modal-backdrop.open .modal { transform: scale(1) translateY(0); opacity: 1; }
+  .modal-close { position: absolute; top: 1rem; right: 1rem; width: 36px; height: 36px; border-radius: 50%; background: var(--bg-dim); display: grid; place-items: center; color: var(--ink-soft); transition: background .2s ease, color .2s ease, transform .2s ease; z-index: 2; }
+  .modal-close:hover { background: var(--ink); color: var(--bg); transform: rotate(90deg); }
+  .video-wrap { aspect-ratio: 16/9; background: #000; width: 100%; border-bottom: 1px solid var(--rule); overflow: hidden; }
+  .video-wrap iframe { width: 100%; height: 100%; border: 0; display: block; }
+  .video-placeholder { width: 100%; height: 100%; display: grid; place-items: center; background: linear-gradient(135deg, var(--bg-dim), var(--bg)); color: var(--ink-soft); text-align: center; padding: 2rem; }
+  .video-placeholder .icon { width: 64px; height: 64px; border-radius: 50%; background: var(--bg); border: 1px solid var(--rule-strong); display: grid; place-items: center; margin: 0 auto 1.2rem; color: var(--accent); }
+  .video-placeholder h4 { font-family: var(--serif); font-size: 1.4rem; margin: 0 0 .4rem; color: var(--ink); }
+  .video-placeholder p { font-size: .9rem; margin: 0; max-width: 40ch; }
+  .modal-body { padding: 2rem 2.2rem 2.4rem; }
+  .modal-body .pill { margin-bottom: 1rem; }
+  .modal-body h3 { font-family: var(--serif); font-weight: 500; font-size: clamp(1.6rem, 3vw, 2rem); letter-spacing: -.015em; line-height: 1.15; margin: 0 0 .5rem; }
+  .modal-body .speaker { color: var(--ink-soft); font-size: 1rem; margin: 0 0 1.4rem; }
+  .modal-body .speaker b { color: var(--ink); font-weight: 600; }
+  .modal-body .abstract { font-size: 1.02rem; color: var(--ink-soft); line-height: 1.65; margin: 0 0 1.4rem; }
+  .modal-body .takeaways { margin: 1.6rem 0 1.4rem; padding: 1.2rem 1.4rem; background: var(--bg-dim); border-left: 3px solid var(--accent); border-radius: 0 var(--r-md) var(--r-md) 0; }
+  .modal-body .takeaways h5 { font-size: .75rem; text-transform: uppercase; letter-spacing: .12em; color: var(--accent-deep); margin: 0 0 .6rem; font-weight: 600; }
+  .modal-body .takeaways ul { margin: 0; padding-left: 1.1rem; color: var(--ink); font-size: .94rem; }
+  .modal-body .takeaways li { margin-bottom: .35rem; line-height: 1.5; }
+  .modal-body .ext-links { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: 1.5rem; }
+  .modal-body .ext-links a { display: inline-flex; align-items: center; gap: .4rem; padding: .55rem .9rem; border-radius: var(--r-sm); border: 1px solid var(--rule-strong); background: var(--bg); color: var(--ink); font-size: .85rem; font-weight: 500; }
+  .modal-body .ext-links a:hover { background: var(--bg-dim); border-color: var(--accent); color: var(--accent-deep); }
+
+  /* ────────── space claude mascot ────────── */
+  .space-claude {
+    position: absolute;
+    bottom: 8%;
+    left: 6%;
+    width: 120px;
+    height: 120px;
+    z-index: 1;
+    pointer-events: none;
+    filter: drop-shadow(0 8px 18px rgba(31,30,28,0.18));
+    animation: claude-bob 5.5s ease-in-out infinite;
+    transform-origin: 50% 60%;
+  }
+  .space-claude .helmet-shine { animation: claude-shine 3.2s ease-in-out infinite; transform-origin: 70% 22%; }
+  .space-claude .arm { transform-origin: 50% 70%; }
+  .space-claude .arm-l1 { animation: claude-wave-l 4.1s ease-in-out infinite; }
+  .space-claude .arm-r1 { animation: claude-wave-r 4.6s ease-in-out infinite; }
+  @keyframes claude-bob {
+    0%, 100% { transform: translateY(0) rotate(-2.5deg); }
+    50% { transform: translateY(-12px) rotate(2.5deg); }
+  }
+  @keyframes claude-shine {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: .55; transform: scale(.85); }
+  }
+  @keyframes claude-wave-l {
+    0%, 100% { transform: rotate(0deg); }
+    50% { transform: rotate(-8deg); }
+  }
+  @keyframes claude-wave-r {
+    0%, 100% { transform: rotate(0deg); }
+    50% { transform: rotate(8deg); }
+  }
+  /* tiny stars around claude */
+  .space-claude .star { animation: claude-twinkle 2.4s ease-in-out infinite; transform-origin: center; }
+  .space-claude .star-2 { animation-delay: .8s; }
+  .space-claude .star-3 { animation-delay: 1.6s; }
+  @keyframes claude-twinkle {
+    0%, 100% { opacity: .3; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.4); }
+  }
+
+  /* ────────── Claude FM player ────────── */
+  .claude-fm {
+    position: fixed;
+    bottom: 1.4rem;
+    right: 1.4rem;
+    z-index: 80;
+    font-family: var(--sans);
+  }
+  .claude-fm-tip {
+    position: absolute;
+    bottom: calc(100% + 12px);
+    right: 0;
+    width: 280px;
+    background: var(--ink);
+    color: var(--bg);
+    padding: .75rem .9rem;
+    border-radius: var(--r-md);
+    font-size: .8rem;
+    line-height: 1.5;
+    box-shadow: var(--shadow-lg);
+    opacity: 0;
+    transform: translateY(8px);
+    pointer-events: none;
+    transition: opacity .22s ease, transform .28s cubic-bezier(.34,1.1,.4,1);
+  }
+  .claude-fm-tip::after {
+    content: "";
+    position: absolute;
+    bottom: -5px;
+    right: 28px;
+    width: 10px; height: 10px;
+    background: var(--ink);
+    transform: rotate(45deg);
+  }
+  .claude-fm-tip strong { color: var(--accent); font-weight: 600; }
+  .claude-fm-tip .kbd {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: .7rem;
+    padding: .05rem .35rem;
+    margin: 0 .15rem;
+    border-radius: 4px;
+    background: rgba(250,249,245,0.14);
+    color: #f3efe6;
+  }
+  .claude-fm:hover .claude-fm-tip,
+  .claude-fm:focus-within .claude-fm-tip,
+  .claude-fm.hint .claude-fm-tip {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .claude-fm-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: .55rem;
+    padding: .7rem 1.1rem .7rem .85rem;
+    background: var(--ink);
+    color: var(--bg);
+    border-radius: 999px;
+    font-size: .85rem;
+    font-weight: 500;
+    letter-spacing: .01em;
+    box-shadow: var(--shadow-md);
+    transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
+    cursor: pointer;
+  }
+  .claude-fm-btn:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); background: var(--accent-deep); }
+  .claude-fm-state {
+    font-family: var(--mono);
+    font-size: .62rem;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: rgba(250,249,245,0.55);
+    padding-left: .55rem;
+    margin-left: .35rem;
+    border-left: 1px solid rgba(250,249,245,0.18);
+  }
+  .claude-fm.playing .claude-fm-state { color: var(--accent); }
+  .claude-fm.playing .claude-fm-state::before { content: "live · "; }
+  .claude-fm:not(.playing) .claude-fm-state::after { content: ""; }
+  .claude-fm-btn .eq {
+    display: inline-flex;
+    align-items: flex-end;
+    gap: 2px;
+    height: 14px;
+  }
+  .claude-fm-btn .eq span {
+    display: block;
+    width: 3px;
+    background: var(--accent);
+    border-radius: 2px;
+    height: 30%;
+  }
+  .claude-fm.playing .claude-fm-btn .eq span {
+    animation: eq-bar 1s ease-in-out infinite;
+  }
+  .claude-fm.playing .claude-fm-btn .eq span:nth-child(1) { animation-delay: 0s;   }
+  .claude-fm.playing .claude-fm-btn .eq span:nth-child(2) { animation-delay: .18s; }
+  .claude-fm.playing .claude-fm-btn .eq span:nth-child(3) { animation-delay: .36s; }
+  .claude-fm.playing .claude-fm-btn .eq span:nth-child(4) { animation-delay: .54s; }
+  @keyframes eq-bar {
+    0%, 100% { height: 25%; }
+    50%      { height: 95%; }
+  }
+  .claude-fm-panel {
+    position: absolute;
+    bottom: calc(100% + .65rem);
+    right: 0;
+    width: 320px;
+    background: var(--bg);
+    border: 1px solid var(--rule);
+    border-radius: var(--r-lg);
+    box-shadow: var(--shadow-lg);
+    opacity: 0;
+    transform: translateY(8px) scale(.96);
+    pointer-events: none;
+    transition: opacity .2s ease, transform .25s cubic-bezier(.34,1.1,.4,1);
+    overflow: hidden;
+  }
+  .claude-fm.open .claude-fm-panel {
+    opacity: 1; transform: translateY(0) scale(1); pointer-events: auto;
+  }
+  .claude-fm-panel header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: .9rem 1rem .55rem;
+    border: 0;
+    background: none;
+  }
+  .claude-fm-panel header h6 {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: 1.05rem;
+    margin: 0;
+    color: var(--ink);
+  }
+  .claude-fm-panel header .live {
+    font-family: var(--mono);
+    font-size: .65rem;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--accent-deep);
+    display: inline-flex;
+    align-items: center;
+    gap: .35rem;
+    margin-top: .15rem;
+  }
+  .claude-fm-panel header .live::before {
+    content: "";
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent) 60%, transparent);
+    animation: pulse 1.8s ease-in-out infinite;
+  }
+  .claude-fm-close {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    background: var(--bg-dim);
+    color: var(--ink-soft);
+    display: grid;
+    place-items: center;
+    transition: background .15s ease, color .15s ease;
+  }
+  .claude-fm-close:hover { background: var(--ink); color: var(--bg); }
+  .claude-fm-panel .player {
+    margin: .5rem 1rem 1rem;
+    aspect-ratio: 16 / 9;
+    background: #000;
+    border-radius: var(--r-md);
+    overflow: hidden;
+    border: 1px solid var(--rule);
+  }
+  .claude-fm-panel .player iframe { width: 100%; height: 100%; border: 0; display: block; }
+  .claude-fm-panel .caption {
+    padding: 0 1rem 1rem;
+    font-size: .8rem;
+    color: var(--ink-soft);
+    line-height: 1.45;
+  }
+  .claude-fm-panel .caption a {
+    color: var(--ink-soft);
+    border-bottom: 1px solid var(--rule-strong);
+    font-size: .76rem;
+    margin-top: .25rem;
+    display: inline-block;
+  }
+
+  @media (max-width: 760px) {
+    .timeline::before { left: 22px; }
+    .tl-item { grid-template-columns: 44px 1fr; }
+    .tl-spine { grid-column: 1; }
+    .tl-card, .tl-item:nth-child(even) .tl-card { grid-column: 2; text-align: left; padding: 0 0 0 .9rem; }
+    .card { padding: 1.2rem; }
+    .modal-body { padding: 1.5rem 1.4rem 1.8rem; }
+    .hero { min-height: 70vh; padding: 4rem 1.2rem 3rem; }
+    .section-head { margin-bottom: 2rem; }
+    section.shell { padding: 3rem 1.2rem; }
+    .space-claude { width: 84px; height: 84px; bottom: 3%; left: 4%; }
+    .claude-fm { bottom: .9rem; right: .9rem; }
+    .claude-fm-panel { width: min(300px, calc(100vw - 1.8rem)); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+    .tl-card { opacity: 1; transform: none; }
+  }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <iframe
+    class="hero-video"
+    id="heroVideo"
+    src="https://www.youtube-nocookie.com/embed/YmQ7jRgf4f0?autoplay=1&mute=1&controls=0&showinfo=0&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1&disablekb=1&enablejsapi=1&loop=1&playlist=YmQ7jRgf4f0"
+    title="Claude FM — live"
+    allow="autoplay; encrypted-media; picture-in-picture"
+    referrerpolicy="origin-when-cross-origin"
+    aria-hidden="true"
+    tabindex="-1"></iframe>
+  <div class="hero-overlay" aria-hidden="true"></div>
+
+
+  <div>
+    <span class="hero-eyebrow"><span class="dot"></span>San Francisco · May 6&ndash;7, 2026</span>
+    <h1>Code with Claude, <em>relived</em>.</h1>
+    <p class="lede">An unofficial, lovingly-curated recap of <b>Code with Claude San Francisco</b> and the <b>Extended workshop day</b>. Two days of announcements, deep technical talks, and hands-on sessions &mdash; collected here as an interactive timeline. Click any session to dive in.</p>
+    <div class="hero-meta">
+      <span><b>2</b> days</span>
+      <span><b id="stat-talks">&mdash;</b> talks &amp; workshops</span>
+      <span><b id="stat-speakers">&mdash;</b> speakers</span>
+      <span><b id="stat-videos">&mdash;</b> videos posted</span>
+    </div>
+  </div>
+  <span class="scroll-hint">scroll &middot; the timeline</span>
+</header>
+
+<div class="stickybar" id="stickybar">
+  <div class="stickybar-inner">
+    <div class="brand">
+      <span class="brand-glyph" aria-hidden="true">
+        <svg viewBox="0 0 248 248" width="20" height="20" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path d="M52.4285 162.873L98.7844 136.879L99.5485 134.602L98.7844 133.334H96.4921L88.7237 132.862L62.2346 132.153L39.3113 131.207L17.0249 130.026L11.4214 128.844L6.2 121.873L6.7094 118.447L11.4214 115.257L18.171 115.847L33.0711 116.911L55.485 118.447L71.6586 119.392L95.728 121.873H99.5485L100.058 120.337L98.7844 119.392L97.7656 118.447L74.5877 102.732L49.4995 86.1905L36.3823 76.62L29.3779 71.7757L25.8121 67.2858L24.2839 57.3608L30.6515 50.2716L39.3113 50.8623L41.4763 51.4531L50.2636 58.1879L68.9842 72.7209L93.4357 90.6804L97.0015 93.6343L98.4374 92.6652L98.6571 91.9801L97.0015 89.2625L83.757 65.2772L69.621 40.8192L63.2534 30.6579L61.5978 24.632C60.9565 22.1032 60.579 20.0111 60.579 17.4246L67.8381 7.49965L71.9133 6.19995L81.7193 7.49965L85.7946 11.0443L91.9074 24.9865L101.714 46.8451L116.996 76.62L121.453 85.4816L123.873 93.6343L124.764 96.1155H126.292V94.6976L127.566 77.9197L129.858 57.3608L132.15 30.8942L132.915 23.4505L136.608 14.4708L143.994 9.62643L149.725 12.344L154.437 19.0788L153.8 23.4505L150.998 41.6463L145.522 70.1215L141.957 89.2625H143.994L146.414 86.7813L156.093 74.0206L172.266 53.698L179.398 45.6635L187.803 36.802L193.152 32.5484H203.34L210.726 43.6549L207.415 55.1159L196.972 68.3492L188.312 79.5739L175.896 96.2095L168.191 109.585L168.882 110.689L170.738 110.53L198.755 104.504L213.91 101.787L231.994 98.7149L240.144 102.496L241.036 106.395L237.852 114.311L218.495 119.037L195.826 123.645L162.07 131.592L161.696 131.893L162.137 132.547L177.36 133.925L183.855 134.279H199.774L229.447 136.524L237.215 141.605L241.8 147.867L241.036 152.711L229.065 158.737L213.019 154.956L175.45 145.977L162.587 142.787H160.805V143.85L171.502 154.366L191.242 172.089L215.82 195.011L217.094 200.682L213.91 205.172L210.599 204.699L188.949 188.394L180.544 181.069L161.696 165.118H160.422V166.772L164.752 173.152L187.803 207.771L188.949 218.405L187.294 221.832L181.308 223.959L174.813 222.777L161.187 203.754L147.305 182.486L136.098 163.345L134.745 164.2L128.075 235.42L125.019 239.082L117.887 241.8L111.902 237.31L108.718 229.984L111.902 215.452L115.722 196.547L118.779 181.541L121.58 162.873L123.291 156.636L123.14 156.219L121.773 156.449L107.699 175.752L86.304 204.699L69.3663 222.777L65.291 224.431L58.2867 220.768L58.9235 214.27L62.8713 208.48L86.304 178.705L100.44 160.155L109.551 149.507L109.462 147.967L108.959 147.924L46.6977 188.512L35.6182 189.93L30.7788 185.44L31.4156 178.115L33.7079 175.752L52.4285 162.873Z"/>
+        </svg>
+      </span>
+      <span>Code with Claude &middot; SF 2026</span>
+    </div>
+    <div class="stickybar-right">
+      <div class="tabs" role="tablist" aria-label="Conference day">
+        <span class="tab-indicator" id="tabInd"></span>
+        <button class="tab" role="tab" aria-selected="true" data-day="1">Day 1 &middot; May 6</button>
+        <button class="tab" role="tab" aria-selected="false" data-day="2">Day 2 &middot; May 7 &middot; Extended</button>
+      </div>
+      <a class="more-link" href="https://www.anthropic.com/news" target="_blank" rel="noopener" title="Read the announcements on Anthropic's blog">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M7 17L17 7"/>
+          <path d="M8 7h9v9"/>
+        </svg>
+        <span>Announcements</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+<section class="shell announcements">
+  <div class="section-head">
+    <h2>The big announcements</h2>
+    <span class="meta">TL;DR · May 6, 2026</span>
+  </div>
+  <div class="ann-grid">
+    <a class="ann featured" href="https://www.anthropic.com/news/higher-limits-spacex" target="_blank" rel="noopener">
+      <span class="ann-tag">Compute · headline news</span>
+      <h3>Higher limits for Claude — and a compute deal with SpaceX</h3>
+      <p>From the keynote stage: Anthropic announced a deal to take <b>the entire compute capacity</b> of SpaceX's Colossus 1 supercomputer in Memphis &mdash; <b>220,000+ NVIDIA GPUs</b> (H100, H200, GB200), <b>300+ megawatts</b> of new capacity. Same post: Claude Code limits <b>doubled</b> for Pro, Max, Team, and seat-based Enterprise; peak-hour reductions removed; Opus API limits raised.</p>
+      <span class="ext">anthropic.com/news/higher-limits-spacex ↗</span>
+    </a>
+
+    <a class="ann" href="https://platform.claude.com/docs/en/managed-agents/overview" target="_blank" rel="noopener">
+      <span class="ann-tag">Managed Agents</span>
+      <h3>Multi-Agent Orchestration</h3>
+      <p>Scale a fleet of agents and have them break complex tasks into coordinated pieces &mdash; first-class on the Claude Managed Agents platform.</p>
+      <span class="ext">platform.claude.com/docs ↗</span>
+    </a>
+
+    <a class="ann" href="https://platform.claude.com/docs/en/managed-agents/overview" target="_blank" rel="noopener">
+      <span class="ann-tag">Managed Agents</span>
+      <h3>Outcomes</h3>
+      <p>Define success criteria for an agent and let it iterate autonomously to hit them &mdash; reframes agent design around <i>what good looks like</i>, not the steps to get there.</p>
+      <span class="ext">platform.claude.com/docs ↗</span>
+    </a>
+
+    <a class="ann" href="https://platform.claude.com/docs/en/managed-agents/dreams" target="_blank" rel="noopener">
+      <span class="ann-tag">Managed Agents</span>
+      <h3>Dreaming</h3>
+      <p>Between sessions, Claude inspects what it did and writes new memories. Agents that get better at <i>your</i> workflow the more they run it. Featured deep-dive talk by Mahesh Murag.</p>
+      <span class="ext">platform.claude.com/docs/dreams ↗</span>
+    </a>
+
+    <a class="ann" href="https://code.claude.com/docs/en/code-review" target="_blank" rel="noopener">
+      <span class="ann-tag">Claude Code</span>
+      <h3>Code Review</h3>
+      <p>Automated PR review built into Claude Code &mdash; the same tool every team at Anthropic uses internally, now available to everyone.</p>
+      <span class="ext">code.claude.com/docs/code-review ↗</span>
+    </a>
+
+    <a class="ann" href="https://code.claude.com/docs/en/whats-new/2026-w15" target="_blank" rel="noopener">
+      <span class="ann-tag">Claude Code</span>
+      <h3>CI auto-fix</h3>
+      <p>When CI fails on a PR, Claude files an automatic fix back against the same PR. Less context-switching; more "the bot already pushed the patch."</p>
+      <span class="ext">code.claude.com/docs/whats-new ↗</span>
+    </a>
+
+    <a class="ann" href="https://support.claude.com/en/articles/11932705-automated-security-reviews-in-claude-code" target="_blank" rel="noopener">
+      <span class="ann-tag">Security</span>
+      <h3>Automated security reviews</h3>
+      <p>Claude Code now runs security-focused review passes over changes &mdash; SQL injection, XSS, auth issues, secrets &mdash; before the PR ships.</p>
+      <span class="ext">support.claude.com ↗</span>
+    </a>
+
+    <a class="ann" href="https://code.claude.com/docs/en/routines" target="_blank" rel="noopener">
+      <span class="ann-tag">Claude Code</span>
+      <h3>Routines</h3>
+      <p>"Higher-order prompts." Define an async automation that wakes up on a schedule or trigger and produces ready-to-merge PRs without a human in the loop.</p>
+      <span class="ext">code.claude.com/docs/routines ↗</span>
+    </a>
+
+    <a class="ann" href="https://code.claude.com/docs/en/agent-sdk/overview" target="_blank" rel="noopener">
+      <span class="ann-tag">Developer</span>
+      <h3>Claude Agent SDK</h3>
+      <p>The same SDK Anthropic uses to build Claude Code itself, now public for outside developers building their own agents.</p>
+      <span class="ext">code.claude.com/docs/agent-sdk ↗</span>
+    </a>
+  </div>
+  <p class="ann-source">Sources verified against the <a href="https://www.anthropic.com/news" target="_blank" rel="noopener">Anthropic newsroom</a>, the <a href="https://platform.claude.com/docs/en/managed-agents/overview" target="_blank" rel="noopener">Claude Managed Agents docs</a>, <a href="https://code.claude.com/docs/en/" target="_blank" rel="noopener">code.claude.com</a>, and <a href="https://simonwillison.net/2026/May/6/code-w-claude-2026/" target="_blank" rel="noopener">Simon Willison's live blog</a> &middot; <a href="https://arstechnica.com/ai/2026/05/anthropic-raises-claude-code-usage-limits-credits-new-deal-with-spacex/" target="_blank" rel="noopener">Ars Technica</a></p>
+</section>
+
+<div class="highlights">
+  <section class="shell" style="padding-top: 3.5rem; padding-bottom: 3.5rem;">
+    <div class="section-head">
+      <h2>The themes that ran through it all</h2>
+      <span class="meta">recurring patterns</span>
+    </div>
+    <div class="grid">
+      <div class="hl"><div class="num">01</div><div class="label"><b>Evals close the loop.</b> Your agent is what your evals make it to be &mdash; LLM-as-judge calibrated against human disagreement signals.</div></div>
+      <div class="hl"><div class="num">02</div><div class="label"><b>Skills over long prompts.</b> A 400-line system prompt is a smell. Decompose into skills, tools, and one well-placed subagent.</div></div>
+      <div class="hl"><div class="num">03</div><div class="label"><b>Plan in HTML, not Markdown.</b> Rich artifacts &mdash; diagrams, code blocks, multiple UI variants &mdash; beat long flat plans for human comprehension.</div></div>
+      <div class="hl"><div class="num">04</div><div class="label"><b>Make the app verifiable at runtime.</b> Build apps so an agent can introspect state, not just read code or wait for tests.</div></div>
+      <div class="hl"><div class="num">05</div><div class="label"><b>Trajectory ledgers.</b> Append-only logs of every coding session, Slack thread, and meeting &mdash; context as the new org chart.</div></div>
+      <div class="hl"><div class="num">06</div><div class="label"><b>"Interview me."</b> The magic phrase. Let Claude pull intent out of your head before it writes a line.</div></div>
+    </div>
+  </section>
+</div>
+
+<section class="shell" id="timelineSection">
+  <div class="section-head">
+    <h2 id="dayHeading">Day 1 &middot; Code with Claude San Francisco</h2>
+    <span class="meta" id="dayMeta">claude.com/code-with-claude/san-francisco</span>
+  </div>
+  <div class="timeline" id="timeline"></div>
+</section>
+
+<footer>
+  <div class="links">
+    <a href="https://claude.com/code-with-claude/san-francisco" target="_blank" rel="noopener">Day 1 site</a>
+    <a href="https://claude.com/code-with-claude/san-francisco-extended" target="_blank" rel="noopener">Day 2 site</a>
+    <a href="https://www.anthropic.com/engineering" target="_blank" rel="noopener">Anthropic Engineering</a>
+    <a href="https://claude.com/blog" target="_blank" rel="noopener">Claude Blog</a>
+    <a href="https://platform.claude.com/cookbook/" target="_blank" rel="noopener">Claude Cookbook</a>
+  </div>
+  <p class="fine">Unofficial fan recap built from public talk pages and personal notes. Not affiliated with Anthropic. Videos embedded from YouTube where available; sessions marked &ldquo;Not Yet Posted&rdquo; will be updated as recordings appear. Last updated <span id="lastUpdated"></span>.</p>
+</footer>
+
+<!-- ─── Claude FM: pill toggles audio on the hero-background stream ─── -->
+<div class="claude-fm" id="claudeFm">
+  <div class="claude-fm-tip" role="tooltip" id="claudeFmTip">
+    <strong>Claude FM</strong> is the live ambient stream playing as the masthead background &mdash; tap to <strong>unmute</strong> and have music for thinking and building while you scroll the timeline.
+  </div>
+  <button class="claude-fm-btn" id="claudeFmToggle" aria-label="Unmute Claude FM" aria-describedby="claudeFmTip" aria-pressed="false">
+    <span class="eq" aria-hidden="true"><span></span><span></span><span></span><span></span></span>
+    <span class="claude-fm-label">Claude FM</span>
+    <span class="claude-fm-state" aria-hidden="true">muted</span>
+  </button>
+</div>
+
+<!-- ─── Photo lightbox (opened from polaroids on the timeline) ─── -->
+<div class="lightbox" id="lightbox" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Conference photo viewer">
+  <button class="lightbox-btn lightbox-close" id="lightboxClose" aria-label="Close photo">
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M2 2l10 10M12 2L2 12"/></svg>
+  </button>
+  <div class="lightbox-frame">
+    <img class="lightbox-img" id="lightboxImg" alt="">
+    <div class="lightbox-info">
+      <div class="meta" id="lightboxMeta"></div>
+      <div class="lightbox-nav">
+        <button class="lightbox-btn" id="lightboxPrev" aria-label="Previous photo">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 2L4 7l5 5"/></svg>
+        </button>
+        <button class="lightbox-btn" id="lightboxNext" aria-label="Next photo">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 2l5 5-5 5"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal-backdrop" id="modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <article class="modal">
+    <button class="modal-close" id="modalClose" aria-label="Close session details">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M2 2l10 10M12 2L2 12"/></svg>
+    </button>
+    <div class="video-wrap" id="videoWrap"></div>
+    <div class="modal-body" id="modalBody"></div>
+  </article>
+</div>
+
+<script>
+// ─── escape helper for any string interpolated into HTML ───
+// (All session content is dev-controlled, but escaping makes the
+// site safe to feed from a future JSON source without rework.)
+const esc = (s) => String(s).replace(/[&<>"']/g, c => ({
+  '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
+}[c]));
+
+// ─── session data: single source of truth ───
+// Add a youtubeId when a recording is posted. Until then, leave it
+// null and the UI shows "Not Yet Posted".
+const SESSIONS = [
+  // ═══════════════ DAY 1 — Code with Claude SF (May 6, 2026) ═══════════════
+  { day:1, time:"09:00", title:"Opening Keynote", speaker:"Ami Vora, Dianne Penn, Angela Jiang, Katelyn Lesse, Cat Wu, Boris Cherny — Anthropic", type:"keynote",
+    summary:"Anthropic leadership opens Code with Claude with the year's big announcements across product, research, the Claude Platform, Claude Code, and engineering.",
+    tags:["Keynote","Announcements"], youtubeId:null,
+    sessionUrl:"https://claude.com/code-with-claude/session/sf-opening-keynote" },
+
+  { day:1, time:"10:30", title:"What's new in Claude Code", speaker:"Dickson Tsai — Anthropic", type:"talk",
+    summary:"A twenty-minute overview of recent Claude Code updates: what shipped, the reasoning behind each decision, and how to put the new features to work in your own workflow.",
+    tags:["Claude Code","Updates"], youtubeId:null,
+    sessionUrl:"https://claude.com/code-with-claude/session/sf-whats-new-in-claude-code" },
+
+  { day:1, time:"10:30", title:"Memory and dreaming for self-learning agents", speaker:"Mahesh Murag — Claude Platform, Anthropic", type:"talk",
+    summary:"How memory and \"dreaming\" turn Claude Managed Agents into self-learning systems. Design considerations for memory architectures, and how dreaming verifies and enriches memory between sessions.",
+    tags:["Memory","Managed Agents","Self-learning"], youtubeId:"RtywqDFBYnQ",
+    sessionUrl:"https://claude.com/code-with-claude/session/sf-memory-and-dreaming-for-self-learning-agents" },
+
+  { day:1, time:"11:15", title:"Caching, harnesses, and advisors: Building on Claude at GitHub scale", speaker:"Mario Rodriguez (GitHub) & Brad Abrams (Anthropic)", type:"talk",
+    summary:"GitHub's Copilot team on deploying Claude across chat, CLI, coding agent, and code review for millions of developers — caching, eval strategies, and the new Advisor pattern for quality at lower cost.",
+    tags:["GitHub","Caching","Evals","Scale"], youtubeId:null,
+    sessionUrl:"https://claude.com/code-with-claude/session/sf-caching-harnesses-and-advisors-building-on-claude-at-github-scale" },
+
+  { day:1, time:"11:15", title:"The expanding toolkit", speaker:"Lucas Gonzalez — Anthropic", type:"talk",
+    summary:"How tool use, context management, code execution, and computer use have evolved across Claude model generations — and how those primitives compose into actually-working agents.",
+    tags:["Tool use","Computer use","Agents"], youtubeId:"KLCuxMDZSDg",
+    sessionUrl:"https://claude.com/code-with-claude/session/sf-the-expanding-toolkit" },
+
+  { day:1, time:"12:00", title:"How to get to production faster with Claude Managed Agents", speaker:"Jess Yan & Lance Martin — Anthropic", type:"talk",
+    summary:"Claude Managed Agents take the infrastructure problem off the table — security, state, permissions, deploy. Focus on the agent's core logic; the platform handles the rest at scale.",
+    tags:["Managed Agents","Production","Platform"], youtubeId:null,
+    sessionUrl:"https://claude.com/code-with-claude/session/sf-how-to-get-to-production-faster-with-claude-managed-agents" },
+
+  { day:1, time:"13:00", title:"A conversation with Dario Amodei & Daniela Amodei", speaker:"Dario Amodei, Daniela Amodei — Anthropic; moderated by Ami Vora", type:"keynote",
+    summary:"A fireside with Anthropic's CEO and President on Claude, AI progress, and where the next year is heading from the inside.",
+    tags:["Fireside","Leadership"], youtubeId:null,
+    sessionUrl:"https://claude.com/code-with-claude/session/a-conversation-with-dario-amodei-daniela-amodei" },
+
+  { day:1, time:"13:50", title:"Live coding session with Boris Cherny and Jarred Sumner", speaker:"Boris Cherny & Jarred Sumner — Anthropic", type:"workshop",
+    summary:"Ever wonder how the Claude Code team actually uses Claude Code? A live session with the head of Claude Code and the creator of Bun working through real-world tasks together.",
+    tags:["Live coding","Claude Code","Bun"], youtubeId:null,
+    sessionUrl:"https://claude.com/code-with-claude/session/sf-live-coding-session-with-boris-cherny-and-jarred-sumner" },
+
+  { day:1, time:"13:50", title:"Building with Claude Managed Agents and Asana AI teammates", speaker:"Arnab Bose — Asana", type:"talk",
+    summary:"How agentic systems move AI past isolated experiments into real organizational value — agents that ideate, orchestrate, and finish work alongside human teammates.",
+    tags:["Asana","Managed Agents","Org"], youtubeId:"BrpB-h1e--k",
+    sessionUrl:"https://claude.com/code-with-claude/session/sf-building-with-claude-managed-agents-and-asana-ai-teammates" },
+
+  { day:1, time:"14:35", title:"Running an AI-native engineering org", speaker:"Fiona Fung — Anthropic (Claude Code)", type:"talk",
+    summary:"The org-design questions that surfaced when agentic coding became standard at Anthropic: code review, ownership, recruiting, and the process changes needed to keep velocity high.",
+    tags:["Engineering org","Process","AI-native"], youtubeId:"igO8iyca2_g",
+    sessionUrl:"https://claude.com/code-with-claude/session/sf-running-an-ai-native-engineering-org" },
+
+  { day:1, time:"15:20", title:"The thinking lever", speaker:"Matt Bleifer — Anthropic Research Product", type:"talk",
+    summary:"Adaptive thinking and effort controls — how to decide how much Claude should reason for each task. Thinking budgets, effort levels, and the cost / latency / quality tradeoffs that come with them.",
+    tags:["Thinking","Effort","Cost/quality"], youtubeId:"OXJO4LldSnc",
+    sessionUrl:"https://claude.com/code-with-claude/session/sf-the-thinking-lever" },
+
+  { day:1, time:"16:05", title:"Building with Claude on Google Cloud", speaker:"Ivan Nardini — Google Cloud", type:"workshop",
+    summary:"A live build spanning five roles and the full software lifecycle — Claude plus Google Cloud, subagents, MCP servers, and custom skills. Audience tests the finished app right after the session.",
+    tags:["Google Cloud","MCP","Subagents"], youtubeId:"SqHsS737CeA",
+    sessionUrl:"https://claude.com/code-with-claude/session/sf-building-with-claude-on-google-cloud" },
+
+  { day:1, time:"16:50", title:"Evaluating and improving Replit Agent at scale", speaker:"Michele Catasta (Replit) & Hannah Moran (Anthropic)", type:"talk",
+    summary:"How Replit closed the AI-product evaluation gap with ViBench — a public vibe-coding benchmark that scores whether the generated app actually works — and the offline/online loop driving improvements.",
+    tags:["Evals","Replit","ViBench"], youtubeId:"snroDwX1-JU",
+    sessionUrl:"https://claude.com/code-with-claude/session/sf-evaluating-and-improving-replit-agent-at-scale" },
+
+  { day:1, time:"17:35", title:"Giving coding agents their own computers: How Cursor built cloud agents", speaker:"Alexi Robbins — Cursor", type:"talk",
+    summary:"Each Cursor cloud agent gets its own isolated VM — write code, run a browser, test changes, ship merge-ready PRs in parallel. These agents now author over 30% of Cursor's internally merged PRs.",
+    tags:["Cursor","Cloud agents","Sandboxing"], youtubeId:"BbYSGxtsMic",
+    sessionUrl:"https://claude.com/code-with-claude/session/sf-giving-coding-agents-their-own-computers-how-cursor-built-cloud-agents" },
+
+  // ═══════════════ DAY 2 — Code with Claude Extended (May 7, 2026) ═══════════════
+  { day:2, time:"09:30", title:"Community general session", speaker:"Boris Cherny — Anthropic", type:"keynote",
+    summary:"The opening of the Extended day — a short general session to set the tone for a day of community-led workshops and lightning talks.",
+    tags:["Opening","Community"], youtubeId:null,
+    sessionUrl:"https://claude.com/code-with-claude/session/sf-ext-community-general-session" },
+
+  { day:2, time:"10:00", title:"Do agents dream of data models?", speaker:"Caitlin Colgrove", type:"talk",
+    summary:"What happens when you let agents own the data layer — schema design, evolution, and the surprising patterns that emerge when an LLM owns more than the application code.",
+    tags:["Data models","Agents"], youtubeId:null,
+    sessionUrl:"https://claude.com/code-with-claude/session/sf-ext-do-agents-dream-of-data-models" },
+
+  { day:2, time:"10:00", title:"Claude and Sol the trophy tomato", speaker:"Martin DeVido", type:"talk",
+    summary:"A live story of building with Claude — Sol the trophy tomato — and what an oddly specific project teaches about turning a long-tail hobby into something shippable.",
+    tags:["Show & tell","Lightning"], youtubeId:null,
+    sessionUrl:"https://claude.com/code-with-claude/session/sf-ext-claude-and-sol-the-trophy-tomato" },
+
+  { day:2, time:"10:00", title:"How we Claude Code", speaker:"Thariq Shihipar", type:"workshop",
+    summary:"Inside Thariq's actual workflow. The magic phrase is \"interview me\". Pair Claude with the asktool for variations, and build apps that are verifiable at runtime — not just at test time.",
+    tags:["Workflow","Verifiable React","Zed"], youtubeId:null,
+    takeaways:[
+      "\"Interview me\" — let Claude pull intent out of your head before it writes a line.",
+      "Bun is held up as the best-verified repo in the world — give the model something concrete to verify against.",
+      "Phase-3 \"verify\": design apps so an AI agent can introspect runtime state, not just read source."
+    ],
+    sessionUrl:"https://claude.com/code-with-claude/session/sf-ext-how-we-claude-code" },
+
+  { day:2, time:"10:45", title:"Designing multi-agent systems: When to split, when to sandbox, what to ship", speaker:"Nick Khami", type:"talk",
+    summary:"A decision framework for multi-agent architectures — when to decompose into subagents, when to sandbox, and what's actually shippable today vs. still a research demo.",
+    tags:["Multi-agent","Architecture"], youtubeId:null,
+    sessionUrl:"https://claude.com/code-with-claude/session/sf-ext-designing-multi-agent-systems-when-to-split-when-to-sandbox-what-to-ship" },
+
+  { day:2, time:"10:45", title:"postvisit.ai — How a practicing cardiologist built a working patient followup platform in 7 days", speaker:"Michal Nedoszytko", type:"talk",
+    summary:"A clinician's story of going from idea to working patient-followup platform in a single week with Claude — what it took, where it broke, and what it now does for real patients.",
+    tags:["Healthcare","Solo build","Story"], youtubeId:null,
+    sessionUrl:"https://claude.com/code-with-claude/session/sf-ext-postvisit-ai-how-a-practicing-cardiologist-built-a-working-patient-followup-platform-in-7-days" },
+
+  { day:2, time:"11:00", title:"Ship your first Managed Agent", speaker:"Gagan Bhat", type:"workshop",
+    summary:"A hands-on walkthrough of shipping a real Claude Managed Agent end-to-end — define, deploy, test, iterate.",
+    tags:["Workshop","Managed Agents"], youtubeId:null,
+    sessionUrl:"https://claude.com/code-with-claude/session/sf-ext-ship-your-first-managed-agent" },
+
+  { day:2, time:"11:30", title:"Building AI-native: What three founders bet on and what they'd change", speaker:"Varun Anand, Madhav Jha, Shain Noor — moderated by Lauren Reeder", type:"talk",
+    summary:"A panel of three AI-native founders on what they bet on, what they got wrong, and the decisions they'd unmake if they were starting today.",
+    tags:["Panel","Founders","AI-native"], youtubeId:null,
+    sessionUrl:"https://claude.com/code-with-claude/session/sf-ext-building-ai-native-what-three-founders-bet-on-and-what-theyd-change" },
+
+  { day:2, time:"11:30", title:"Evals for subjective, stateful agents", speaker:"Yikai Zhu & Ajay Arasanipalai", type:"talk",
+    summary:"How to evaluate agents on tasks with no ground truth. Text-based diffs of app state, rubric calibration, and using human–LLM disagreement as a reward signal.",
+    tags:["Evals","Rubrics","State"], youtubeId:null,
+    takeaways:[
+      "LLM-as-judge works best, but is only as powerful as the state representation you give it.",
+      "Build a text-based diff of app state — the LLM sees the change, not the user actions.",
+      "Three measurements that mattered when 4.6 launched: do it well, do what I asked, don't break things."
+    ],
+    sessionUrl:"https://claude.com/code-with-claude/session/sf-ext-evals-for-subjective-stateful-agents" },
+
+  { day:2, time:"12:00", title:"Agents that remember", speaker:"Tina Vachovsky", type:"workshop",
+    summary:"A workshop on building agents with durable memory — when to remember, what to forget, and how to validate that memory is helping not hurting.",
+    tags:["Memory","Workshop","Agents"], youtubeId:null,
+    sessionUrl:"https://claude.com/code-with-claude/session/sf-ext-agents-that-remember" },
+
+  { day:2, time:"13:00", title:"Evals for Taste: Hill-Climbing a Slide-Generation Agent", speaker:"Felix Becker", type:"workshop",
+    summary:"Build evals for subjective work. Have Claude generate the eval generator. Use the best model as judge, ship with Sonnet — and the gap pays for itself.",
+    tags:["Evals","LLM-as-judge","Aesthetics"], youtubeId:null,
+    takeaways:[
+      "Programmatic graders: slide count, font-size minimums, emoji count, text density, image presence.",
+      "Model-as-judge graders: aesthetics & layout (0–5), title↔body alignment (0–5).",
+      "Use best model as judge, smaller model in production. Balance good and bad examples in the judge prompt."
+    ],
+    sessionUrl:"https://claude.com/code-with-claude/session/sf-ext-eval-driven-agent-development" },
+
+  { day:2, time:"13:20", title:"Measure twice, cut once: Closing the gap between AI intent and execution", speaker:"David Loker", type:"talk",
+    summary:"Patterns for narrowing the gap between what you asked an AI for and what it actually did — checks, verifications, and the discipline that makes long agent runs reliable.",
+    tags:["Intent","Verification"], youtubeId:null,
+    sessionUrl:"https://claude.com/code-with-claude/session/sf-ext-measure-twice-cut-once-closing-the-gap-between-ai-intent-and-execution" },
+
+  { day:2, time:"13:20", title:"13 years to 24 hours: How I used Claude to solve a problem I had no business solving", speaker:"Philip Parkinson", type:"talk",
+    summary:"A story about collapsing thirteen years of someone-else's-problem into a one-day build with Claude — what it took to get unstuck, and what it meant on the other side.",
+    tags:["Story","Solo build"], youtubeId:null,
+    sessionUrl:"https://claude.com/code-with-claude/session/sf-ext-13-years-to-24-hours-how-i-used-claude-to-solve-a-problem-i-had-no-business-solving" },
+
+  { day:2, time:"14:00", title:"Tool, skill, or subagent? Decomposing an agent that outgrew its prompt", speaker:"Tanveer Mittal", type:"workshop",
+    summary:"Inherit StockPilot — an inventory agent with 12 tools, 3 hardcoded subagents, and a 402-line system prompt. Decompose it live on Claude Managed Agents and run evals after every change.",
+    tags:["Skills","Subagents","Managed Agents","MCP"], youtubeId:null,
+    takeaways:[
+      "Failure mode: critical context separated by ~200 lines in a long prompt — the agent forgot the active promo multiplier mid-task.",
+      "Trim the system prompt to role + guardrails. Move domain procedures into callable skills loaded on demand.",
+      "R1 task originally made 58 sequential tool calls — refactored to a bash skill running in parallel for the same outcome."
+    ],
+    sessionUrl:"https://claude.com/code-with-claude/session/sf-ext-compose-multi-agent-systems-with-skills-and-mcp" },
+
+  { day:2, time:"14:05", title:"Listen first. Then, keep thinking", speaker:"Mike Brown", type:"talk",
+    summary:"A talk on the practice of staying in the conversation with a long-running agent — listening to what it's actually doing, not just reading the final diff.",
+    tags:["Practice","Long-running"], youtubeId:null,
+    sessionUrl:"https://claude.com/code-with-claude/session/sf-ext-listen-first-then-keep-thinking" },
+
+  { day:2, time:"14:05", title:"Coherence at Claude Code speed", speaker:"Jon McBee", type:"talk",
+    summary:"Keeping a codebase coherent when the rate of change ten-xes overnight — conventions, review, and the practices that don't fold under agent velocity.",
+    tags:["Velocity","Coherence","Practice"], youtubeId:null,
+    sessionUrl:"https://claude.com/code-with-claude/session/sf-ext-coherence-at-claude-code-speed" },
+
+  { day:2, time:"14:50", title:"Claude can code. Experts still matter: Building BioKEA's biodiversity stack", speaker:"Sean Jungbluth", type:"talk",
+    summary:"Why domain expertise still does the heavy lifting even when the model is good — a real engineering tour of BioKEA's biodiversity stack, built with Claude as a collaborator.",
+    tags:["Domain","Biodiversity","Story"], youtubeId:null,
+    sessionUrl:"https://claude.com/code-with-claude/session/sf-ext-claude-can-code-experts-still-matter-building-biokeas-biodiversity-stack" },
+
+  { day:2, time:"14:50", title:"Era Online: Resurrecting a 1999 MMORPG with Claude Code", speaker:"Kyle Easterly", type:"talk",
+    summary:"Bringing a 1999 MMORPG back to life — reverse engineering, server work, and the surprises along the way when Claude Code is in the loop on a 25-year-old codebase.",
+    tags:["Story","Reverse engineering","Games"], youtubeId:null,
+    sessionUrl:"https://claude.com/code-with-claude/session/sf-ext-era-online-resurrecting-a-1999-mmorpg-with-claude-code" },
+
+  { day:2, time:"15:00", title:"Agent Battle: Mine the most diamonds in 45 minutes", speaker:"Matt Roknich", type:"workshop",
+    summary:"Build an agent in 45 minutes whose only job is to mine more diamonds than everyone else's agent. A live competitive workshop with a literal leaderboard.",
+    tags:["Workshop","Competition","Fun"], youtubeId:null,
+    sessionUrl:"https://claude.com/code-with-claude/session/sf-ext-agent-battle-mine-the-most-diamonds-in-45-minutes" },
+
+  { day:2, time:"15:35", title:"Claude & the self-driving company", speaker:"Nicolai Ouporov", type:"talk",
+    summary:"Fleet shows FleetCode — a tool for reviewing Claude Code sessions, not just code. Making company operations fully legible: a single append-only log of every coding session, Slack thread, and call, exposed to Claude over MCP.",
+    tags:["Org design","MCP","Trajectory ledger"], youtubeId:null,
+    takeaways:[
+      "Trajectory ledger: every artifact — PRs, conversations, meetings — upstreamed to one queryable graph.",
+      "Handoff-free execution: contributor finishes at 5 AM; next person picks up the full session, not a status update.",
+      "If it's not in context, it doesn't exist. Operators become stewards encoding values and priorities into the system."
+    ],
+    sessionUrl:"https://claude.com/code-with-claude/session/sf-ext-claude-the-self-driving-company" }
+];
+
+// ─── conference photos (taken by Kevin B. Ridgway) ───
+// Generated by scripts/process_photos.py from conf-pics/. Time is local PT.
+const PHOTOS = [
+  {src:"photos/IMG_1064.jpg",day:2,time:"09:20",label:"Before the day began"},
+  {src:"photos/IMG_1065.jpg",day:2,time:"09:22",label:"Before the day began"},
+  {src:"photos/IMG_1066.jpg",day:2,time:"09:22",label:"Before the day began"},
+  {src:"photos/IMG_1068.jpg",day:2,time:"09:31",label:"During: Community general session — Boris Cherny"},
+  {src:"photos/IMG_1069.jpg",day:2,time:"09:31",label:"During: Community general session — Boris Cherny"},
+  {src:"photos/IMG_1070.jpg",day:2,time:"09:31",label:"During: Community general session — Boris Cherny"},
+  {src:"photos/IMG_1071.jpg",day:2,time:"09:33",label:"During: Community general session — Boris Cherny"},
+  {src:"photos/IMG_1072.jpg",day:2,time:"09:36",label:"During: Community general session — Boris Cherny"},
+  {src:"photos/IMG_1073.jpg",day:2,time:"09:39",label:"During: Community general session — Boris Cherny"},
+  {src:"photos/IMG_1074.jpg",day:2,time:"09:58",label:"During: Community general session — Boris Cherny"},
+  {src:"photos/IMG_1077.jpg",day:2,time:"10:06",label:"During: Do agents dream of data models? · Claude and Sol · How we Claude Code"},
+  {src:"photos/IMG_1078.jpg",day:2,time:"10:16",label:"During: Do agents dream of data models? · Claude and Sol · How we Claude Code"},
+  {src:"photos/IMG_1079.jpg",day:2,time:"10:27",label:"During: Do agents dream of data models? · Claude and Sol · How we Claude Code"},
+  {src:"photos/IMG_1080.jpg",day:2,time:"10:31",label:"During: Do agents dream of data models? · Claude and Sol · How we Claude Code"},
+  {src:"photos/IMG_1081.jpg",day:2,time:"10:36",label:"During: Do agents dream of data models? · Claude and Sol · How we Claude Code"},
+  {src:"photos/IMG_1082.jpg",day:2,time:"10:47",label:"During: Designing multi-agent systems · postvisit.ai"},
+  {src:"photos/IMG_1083.jpg",day:2,time:"11:26",label:"During: Ship your first Managed Agent"},
+  {src:"photos/IMG_1085.jpg",day:2,time:"11:30",label:"During: Building AI-native · Evals for subjective, stateful agents"},
+  {src:"photos/IMG_1086.jpg",day:2,time:"11:38",label:"During: Building AI-native · Evals for subjective, stateful agents"},
+  {src:"photos/IMG_1087.jpg",day:2,time:"11:40",label:"During: Building AI-native · Evals for subjective, stateful agents"},
+  {src:"photos/IMG_1088.jpg",day:2,time:"11:42",label:"During: Building AI-native · Evals for subjective, stateful agents"},
+  {src:"photos/IMG_1089.jpg",day:2,time:"11:44",label:"During: Building AI-native · Evals for subjective, stateful agents"},
+  {src:"photos/IMG_1090.jpg",day:2,time:"11:46",label:"During: Building AI-native · Evals for subjective, stateful agents"},
+  {src:"photos/IMG_1091.jpg",day:2,time:"11:47",label:"During: Building AI-native · Evals for subjective, stateful agents"},
+  {src:"photos/IMG_1092.jpg",day:2,time:"11:58",label:"During: Building AI-native · Evals for subjective, stateful agents"},
+  {src:"photos/IMG_1093.jpg",day:2,time:"11:58",label:"During: Building AI-native · Evals for subjective, stateful agents"},
+  {src:"photos/IMG_1094.jpg",day:2,time:"12:00",label:"During: Agents that remember"},
+  {src:"photos/IMG_1095.jpg",day:2,time:"12:02",label:"During: Agents that remember"},
+  {src:"photos/IMG_1096.jpg",day:2,time:"12:04",label:"During: Agents that remember"},
+  {src:"photos/IMG_1097.jpg",day:2,time:"12:06",label:"During: Agents that remember"},
+  {src:"photos/IMG_1067.jpg",day:2,time:"12:31",label:"During: Agents that remember"},
+  {src:"photos/IMG_1100.jpg",day:2,time:"13:01",label:"During: Evals for Taste — Felix Becker"},
+  {src:"photos/IMG_1101.jpg",day:2,time:"13:04",label:"During: Evals for Taste — Felix Becker"},
+  {src:"photos/IMG_1102.jpg",day:2,time:"13:58",label:"During: Measure twice, cut once · 13 years to 24 hours"},
+  {src:"photos/IMG_1103.jpg",day:2,time:"14:02",label:"During: Tool, skill, or subagent? — Tanveer Mittal"},
+  {src:"photos/IMG_1104.jpg",day:2,time:"14:03",label:"During: Tool, skill, or subagent? — Tanveer Mittal"},
+  {src:"photos/IMG_1105.jpg",day:2,time:"14:23",label:"During: Listen first. Then, keep thinking · Coherence at Claude Code speed"},
+  {src:"photos/IMG_1106.jpg",day:2,time:"14:31",label:"During: Listen first. Then, keep thinking · Coherence at Claude Code speed"},
+  {src:"photos/IMG_1107.jpg",day:2,time:"14:44",label:"During: Listen first. Then, keep thinking · Coherence at Claude Code speed"},
+  {src:"photos/IMG_1108.jpg",day:2,time:"14:50",label:"During: Claude can code · Era Online"},
+  {src:"photos/IMG_1110.jpg",day:2,time:"15:18",label:"During: Agent Battle — Matt Roknich"},
+  {src:"photos/IMG_1111.jpg",day:2,time:"15:30",label:"During: Agent Battle — Matt Roknich"},
+  {src:"photos/IMG_1112.jpg",day:2,time:"15:37",label:"During: Claude & the self-driving company — Nicolai Ouporov"},
+  {src:"photos/IMG_1113.jpg",day:2,time:"15:42",label:"During: Claude & the self-driving company — Nicolai Ouporov"},
+  {src:"photos/IMG_1117.jpg",day:2,time:"19:10",label:"After hours · evening in SF"},
+  {src:"photos/IMG_1118.jpg",day:2,time:"19:16",label:"After hours · evening in SF"},
+  {src:"photos/IMG_1122.jpg",day:2,time:"19:40",label:"After hours · evening in SF"}
+];
+
+// ─── hero background video: fade in once the iframe has loaded ───
+(function heroVideo() {
+  const f = document.getElementById('heroVideo');
+  if (!f) return;
+  // give YouTube ~600ms to actually paint a frame before revealing
+  f.addEventListener('load', () => setTimeout(() => f.classList.add('ready'), 600));
+})();
+
+// ─── timeline render + day switch ───
+const $tl = document.getElementById('timeline');
+const $tabs = document.querySelectorAll('.tab');
+const $ind = document.getElementById('tabInd');
+const $heading = document.getElementById('dayHeading');
+const $meta = document.getElementById('dayMeta');
+let currentDay = 1;
+
+const DAY_META = {
+  1: { heading: "Day 1 · Code with Claude San Francisco", url: "claude.com/code-with-claude/san-francisco" },
+  2: { heading: "Day 2 · Code with Claude Extended", url: "claude.com/code-with-claude/san-francisco-extended" }
+};
+const PILL_LABELS = { keynote:"Keynote", announce:"Announcement", talk:"Talk", workshop:"Workshop", officehours:"Office Hours" };
+
+const playIcon = (unposted) => unposted
+  ? `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="8" cy="8" r="6.5"/><path d="M5 8h6"/></svg>`
+  : `<svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor"><path d="M4 2.5v9l8-4.5z"/></svg>`;
+
+function hhmmToMin(s) {
+  const [h, m] = s.split(':').map(n => parseInt(n, 10));
+  return h * 60 + m;
+}
+
+// For each Day 2 session, collect photos taken between its time and the next
+// session's time. Returns an array (parallel to `items`) of photo arrays.
+function bucketPhotosForDay(items) {
+  const buckets = items.map(() => []);
+  if (!items.length || items[0].day !== 2) return buckets;
+  const starts = items.map(s => hhmmToMin(s.time));
+  for (const p of PHOTOS) {
+    if (p.day !== items[0].day) continue;
+    const pm = hhmmToMin(p.time);
+    // pick the LAST session whose start <= pm
+    let chosen = -1;
+    for (let i = 0; i < starts.length; i++) {
+      if (starts[i] <= pm) chosen = i;
+      else break;
+    }
+    if (chosen >= 0) buckets[chosen].push(p);
+    else buckets[0].push(p); // before-day photos pin to the first session
+  }
+  return buckets;
+}
+
+function renderPolaroidHtml(photos, seedIndex) {
+  if (!photos.length) return '';
+  const p = photos[0];
+  // deterministic tilt per session so it doesn't change on re-render
+  const rot = (((seedIndex * 37) % 7) - 3) + (((seedIndex * 11) % 100) / 100); // ~-3 to +4 deg
+  const stack = photos.length > 1 ? `<span class="polaroid-stack-badge">+${photos.length - 1}</span>` : '';
+  const where = p.label.replace(/^During: /, '').replace(/^Between sessions · /, '');
+  return `
+    <button class="polaroid" data-photos='${esc(JSON.stringify(photos))}' style="--rot:${rot.toFixed(2)}deg" aria-label="Open photo gallery for ${esc(where)}">
+      ${stack}
+      <img src="${esc(p.src)}" alt="Conference photo at ${esc(p.time)}" loading="lazy" decoding="async">
+      <div class="polaroid-caption">
+        <span class="time">May ${p.day === 1 ? '6' : '7'} · ${esc(p.time)} PT · SF</span>
+        <span class="where">${esc(where)}</span>
+        <span class="polaroid-credit">Photo · Kevin B. Ridgway</span>
+      </div>
+    </button>`;
+}
+
+function renderDay(day) {
+  currentDay = day;
+  const items = SESSIONS.filter(s => s.day === day);
+  const photoBuckets = bucketPhotosForDay(items);
+  $tl.innerHTML = items.map((s, i) => {
+    const idx = SESSIONS.indexOf(s);
+    const unposted = !s.youtubeId;
+    const pillClass = esc(s.type);
+    const polaroidHtml = renderPolaroidHtml(photoBuckets[i], i);
+    return `
+      <article class="tl-item">
+        <div class="tl-card">
+          <button class="card" data-idx="${idx}" aria-label="Open ${esc(s.title)}">
+            <div class="card-top">
+              <span class="pill ${pillClass}">${esc(PILL_LABELS[s.type] || 'Session')}</span>
+              <span class="play-bubble ${unposted ? 'unposted' : ''}" aria-hidden="true">${playIcon(unposted)}</span>
+            </div>
+            <h3>${esc(s.title)}</h3>
+            <p class="speaker"><b>${esc(s.speaker)}</b></p>
+            <p class="summary">${esc(s.summary)}</p>
+            <div class="tags">${s.tags.map(t => `<span class="tag">${esc(t)}</span>`).join('')}</div>
+            ${unposted ? `<div class="unposted-flag">Video not yet posted</div>` : ''}
+          </button>
+        </div>
+        <div class="tl-spine">
+          <span class="tl-dot"></span>
+          <span class="tl-time">${esc(s.time)}</span>
+        </div>
+        <div class="tl-photos">${polaroidHtml}</div>
+      </article>`;
+  }).join('');
+
+  $heading.textContent = DAY_META[day].heading;
+  $meta.textContent = DAY_META[day].url;
+
+  $tl.querySelectorAll('.card').forEach(btn => {
+    btn.addEventListener('click', () => openModal(parseInt(btn.dataset.idx, 10)));
+  });
+
+  // wire polaroid clicks → lightbox
+  $tl.querySelectorAll('.polaroid').forEach(p => {
+    p.addEventListener('click', () => {
+      try {
+        const photos = JSON.parse(p.dataset.photos);
+        openLightbox(photos, 0);
+      } catch (_) { /* malformed data — bail */ }
+    });
+  });
+
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+  $tl.querySelectorAll('.tl-card').forEach(el => io.observe(el));
+}
+
+function moveIndicator(target) {
+  if (!target) return;
+  const r = target.getBoundingClientRect();
+  const parent = target.parentElement.getBoundingClientRect();
+  $ind.style.left = (r.left - parent.left) + 'px';
+  $ind.style.width = r.width + 'px';
+}
+
+$tabs.forEach(tab => {
+  tab.addEventListener('click', () => {
+    $tabs.forEach(t => t.setAttribute('aria-selected', t === tab ? 'true' : 'false'));
+    moveIndicator(tab);
+    renderDay(parseInt(tab.dataset.day, 10));
+    document.getElementById('timelineSection').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+});
+
+// ─── modal ───
+const $modal = document.getElementById('modal');
+const $videoWrap = document.getElementById('videoWrap');
+const $modalBody = document.getElementById('modalBody');
+const $modalClose = document.getElementById('modalClose');
+
+function openModal(idx) {
+  const s = SESSIONS[idx];
+  if (!s) return;
+  if (s.youtubeId) {
+    const ytId = encodeURIComponent(s.youtubeId);
+    $videoWrap.innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${ytId}?rel=0&autoplay=1" title="${esc(s.title)}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe>`;
+  } else {
+    $videoWrap.innerHTML = `
+      <div class="video-placeholder">
+        <div>
+          <div class="icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/>
+            </svg>
+          </div>
+          <h4>Not yet posted</h4>
+          <p>The recording for this session isn't up yet. Check back &mdash; this page will be updated as videos appear on the Code with Claude channel.</p>
+        </div>
+      </div>`;
+  }
+  $modalBody.innerHTML = `
+    <span class="pill ${esc(s.type)}">${esc(PILL_LABELS[s.type] || 'Session')} &middot; ${esc(s.time)} &middot; Day ${s.day}</span>
+    <h3 id="modalTitle">${esc(s.title)}</h3>
+    <p class="speaker">with <b>${esc(s.speaker)}</b></p>
+    <p class="abstract">${esc(s.summary)}</p>
+    ${s.takeaways ? `
+      <div class="takeaways">
+        <h5>Key takeaways</h5>
+        <ul>${s.takeaways.map(t => `<li>${esc(t)}</li>`).join('')}</ul>
+      </div>` : ''}
+    <div class="ext-links">
+      ${s.sessionUrl ? `<a href="${esc(s.sessionUrl)}" target="_blank" rel="noopener">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M7 2H2v10h10V7"/><path d="M9 1h4v4M6 8L13 1"/></svg>
+        Session page</a>` : ''}
+    </div>`;
+  $modal.classList.add('open');
+  $modal.setAttribute('aria-hidden', 'false');
+  document.body.style.overflow = 'hidden';
+  $modalClose.focus();
+}
+
+function closeModal() {
+  $modal.classList.remove('open');
+  $modal.setAttribute('aria-hidden', 'true');
+  document.body.style.overflow = '';
+  setTimeout(() => { $videoWrap.innerHTML = ''; }, 300);
+}
+
+$modalClose.addEventListener('click', closeModal);
+$modal.addEventListener('click', e => { if (e.target === $modal) closeModal(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape' && $modal.classList.contains('open')) closeModal(); });
+
+// ─── Photo lightbox: opens a stack of session photos with prev/next nav ───
+(function lightbox() {
+  const $lb    = document.getElementById('lightbox');
+  const $img   = document.getElementById('lightboxImg');
+  const $meta  = document.getElementById('lightboxMeta');
+  const $prev  = document.getElementById('lightboxPrev');
+  const $next  = document.getElementById('lightboxNext');
+  const $close = document.getElementById('lightboxClose');
+  let current = [];
+  let idx = 0;
+
+  function show() {
+    if (!current.length) return;
+    const p = current[idx];
+    $img.src = p.src;
+    $img.alt = p.label;
+    const where = p.label.replace(/^During: /, '').replace(/^Between sessions · /, '');
+    $meta.textContent = `${idx + 1} of ${current.length} · May ${p.day === 1 ? '6' : '7'} · ${p.time} PT · ${where} · Photo: Kevin B. Ridgway`;
+    const has = current.length > 1;
+    $prev.style.visibility = has ? 'visible' : 'hidden';
+    $next.style.visibility = has ? 'visible' : 'hidden';
+  }
+  window.openLightbox = (photos, start = 0) => {
+    current = photos; idx = start;
+    show();
+    $lb.classList.add('open');
+    $lb.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  };
+  function closeLb() {
+    $lb.classList.remove('open');
+    $lb.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    setTimeout(() => { $img.src = ''; }, 300);
+  }
+  $prev.addEventListener('click', () => { idx = (idx - 1 + current.length) % current.length; show(); });
+  $next.addEventListener('click', () => { idx = (idx + 1) % current.length; show(); });
+  $close.addEventListener('click', closeLb);
+  $lb.addEventListener('click', e => { if (e.target === $lb) closeLb(); });
+  document.addEventListener('keydown', e => {
+    if (!$lb.classList.contains('open')) return;
+    if (e.key === 'Escape') closeLb();
+    else if (e.key === 'ArrowLeft')  $prev.click();
+    else if (e.key === 'ArrowRight') $next.click();
+  });
+})();
+
+// ─── Claude FM pill: toggle mute on the hero background stream ───
+// The stream is the visual background of the masthead — the pill just
+// controls whether the audio plays. We talk to the YouTube iframe via
+// postMessage (it was embedded with enablejsapi=1).
+(function claudeFm() {
+  const root  = document.getElementById('claudeFm');
+  const btn   = document.getElementById('claudeFmToggle');
+  const state = btn.querySelector('.claude-fm-state');
+  const frame = document.getElementById('heroVideo');
+  if (!root || !btn || !frame) return;
+  let playing = false;
+
+  function send(func) {
+    try {
+      frame.contentWindow.postMessage(
+        JSON.stringify({ event: 'command', func, args: [] }),
+        '*'
+      );
+    } catch (_) { /* iframe not ready yet — retry below */ }
+  }
+
+  function setPlaying(on) {
+    playing = on;
+    send(on ? 'unMute' : 'mute');
+    if (on) send('playVideo');           // some browsers pause when tab loses focus
+    root.classList.toggle('playing', on);
+    btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+    btn.setAttribute('aria-label', on ? 'Mute Claude FM' : 'Unmute Claude FM');
+    if (state) state.textContent = on ? 'on' : 'muted';
+  }
+
+  btn.addEventListener('click', () => {
+    setPlaying(!playing);
+    // Once the user has interacted, stop nagging them with the auto-hint.
+    root.classList.remove('hint');
+  });
+
+  // First-load hint: show the tooltip briefly so people discover the feature.
+  // Skipped if the user has already seen it (localStorage flag).
+  try {
+    if (!localStorage.getItem('cwc.fm.hinted')) {
+      setTimeout(() => {
+        root.classList.add('hint');
+        setTimeout(() => root.classList.remove('hint'), 5200);
+        localStorage.setItem('cwc.fm.hinted', '1');
+      }, 1400);
+    }
+  } catch (_) { /* localStorage disabled — skip the auto-hint */ }
+})();
+
+// ─── stats + init ───
+document.getElementById('stat-talks').textContent = SESSIONS.length;
+document.getElementById('stat-speakers').textContent = new Set(SESSIONS.map(s => s.speaker)).size;
+document.getElementById('stat-videos').textContent = SESSIONS.filter(s => s.youtubeId).length;
+document.getElementById('lastUpdated').textContent = new Date().toLocaleDateString('en-US', { year:'numeric', month:'long', day:'numeric' });
+
+renderDay(1);
+requestAnimationFrame(() => moveIndicator(document.querySelector('.tab[aria-selected="true"]')));
+window.addEventListener('resize', () => moveIndicator(document.querySelector('.tab[aria-selected="true"]')));
+</script>
+</body>
+</html>

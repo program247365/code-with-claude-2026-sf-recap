@@ -469,23 +469,33 @@
     color: #2a2723;
     text-align: center;
   }
-  /* per-slot grid spans + aspect ratios + tilts */
-  .venue-photo.s1 { grid-column: span 7; transform: rotate(-1.6deg); }
-  .venue-photo.s1 img { aspect-ratio: 4/3; }
-  .venue-photo.s2 { grid-column: span 5; transform: rotate(1.4deg); }
-  .venue-photo.s2 img { aspect-ratio: 16/9; }
-  .venue-photo.s3 { grid-column: span 4; transform: rotate(2.2deg); }
-  .venue-photo.s3 img { aspect-ratio: 4/3; }
-  .venue-photo.s4 { grid-column: span 4; transform: rotate(-2.4deg); }
-  .venue-photo.s4 img { aspect-ratio: 4/3; }
-  .venue-photo.s5 { grid-column: span 4; transform: rotate(1.8deg); }
-  .venue-photo.s5 img { aspect-ratio: 4/3; }
-  .venue-photo.s6 { grid-column: span 5; transform: rotate(-1.2deg); }
-  .venue-photo.s6 img { aspect-ratio: 4/3; }
-  .venue-photo.s7 { grid-column: span 4; transform: rotate(2.5deg); }
-  .venue-photo.s7 img { aspect-ratio: 4/3; }
-  .venue-photo.s8 { grid-column: span 3; transform: rotate(-2deg); }
-  .venue-photo.s8 img { aspect-ratio: 3/4; }
+  /* per-slot grid spans + aspect ratios + tilts.
+     Layout:
+       Row 1:  s1 (full width hero, panoramic 21:9 crop of the venue)
+       Row 2:  s2 splat stage  ·  s3 swag bag
+       Row 3:  s4 mural  ·  s5 Bouncing Clawd  ·  s6 lamp still-life
+       Row 4:  s7 c/c lounge  ·  s8 vending pixel-art  ·  s9 Van Ness wires
+       Row 5:  s10 Waymo coda (wide, centered) */
+  .venue-photo.s1  { grid-column: span 12; transform: rotate(-0.8deg); }
+  .venue-photo.s1  img { aspect-ratio: 21/9; }
+  .venue-photo.s2  { grid-column: span 7; transform: rotate(-1.6deg); }
+  .venue-photo.s2  img { aspect-ratio: 4/3; }
+  .venue-photo.s3  { grid-column: span 5; transform: rotate(1.4deg); }
+  .venue-photo.s3  img { aspect-ratio: 4/3; }
+  .venue-photo.s4  { grid-column: span 5; transform: rotate(2deg); }
+  .venue-photo.s4  img { aspect-ratio: 16/9; }
+  .venue-photo.s5  { grid-column: span 4; transform: rotate(-2.4deg); }
+  .venue-photo.s5  img { aspect-ratio: 4/3; }
+  .venue-photo.s6  { grid-column: span 3; transform: rotate(1.8deg); }
+  .venue-photo.s6  img { aspect-ratio: 3/4; }
+  .venue-photo.s7  { grid-column: span 4; transform: rotate(-1.2deg); }
+  .venue-photo.s7  img { aspect-ratio: 4/3; }
+  .venue-photo.s8  { grid-column: span 4; transform: rotate(2.5deg); }
+  .venue-photo.s8  img { aspect-ratio: 4/3; }
+  .venue-photo.s9  { grid-column: span 4; transform: rotate(-1.8deg); }
+  .venue-photo.s9  img { aspect-ratio: 4/3; }
+  .venue-photo.s10 { grid-column: 4 / span 6; transform: rotate(2deg); }
+  .venue-photo.s10 img { aspect-ratio: 16/9; }
   .venue-credit {
     margin-top: 2.5rem;
     text-align: right;
@@ -497,16 +507,19 @@
   }
   @media (max-width: 900px) {
     .venue-photo, .venue-photo.s1, .venue-photo.s2, .venue-photo.s3, .venue-photo.s4,
-    .venue-photo.s5, .venue-photo.s6, .venue-photo.s7, .venue-photo.s8 {
+    .venue-photo.s5, .venue-photo.s6, .venue-photo.s7, .venue-photo.s8,
+    .venue-photo.s9, .venue-photo.s10 {
       grid-column: span 6;
       transform: rotate(0deg);
     }
+    .venue-photo.s1, .venue-photo.s10 { grid-column: span 12; }
     .venue-photo:nth-child(odd) { transform: rotate(-1deg); }
     .venue-photo:nth-child(even) { transform: rotate(1deg); }
   }
   @media (max-width: 560px) {
     .venue-photo, .venue-photo.s1, .venue-photo.s2, .venue-photo.s3, .venue-photo.s4,
-    .venue-photo.s5, .venue-photo.s6, .venue-photo.s7, .venue-photo.s8 {
+    .venue-photo.s5, .venue-photo.s6, .venue-photo.s7, .venue-photo.s8,
+    .venue-photo.s9, .venue-photo.s10 {
       grid-column: span 12;
     }
   }
@@ -1515,23 +1528,27 @@ const THEMES = [
 ];
 
 // ─── art-directed venue gallery (non-talk photos with editorial captions) ───
-// Order matters: positions s1–s8 are sized + tilted in the CSS above.
+// Order matters: positions s1–s10 are sized + tilted in the CSS above.
 const VENUE_PHOTOS = [
-  { src: "photos/IMG_1065.jpg", slot: "s1",
+  { src: "photos/IMG_1064.jpg", slot: "s1", pos: "center 50%",
+    caption: "The room before the keynote — cherry-wood stage, the Claude wordmark on a single white panel, two coral pink screens flanking, splat artwork tucked into the side-wall alcoves." },
+  { src: "photos/IMG_1065.jpg", slot: "s2",
     caption: "The Claude splat, twelve feet tall, on the main stage — smaller siblings echoed across the side-wall alcoves." },
-  { src: "photos/IMG_1082.jpg", slot: "s2", pos: "center 30%",
+  { src: "photos/IMG_1126.jpg", slot: "s3",
+    caption: "The swag bag: two plush Claudes (one came in a brown explorer hat), a Code w/ Claude lanyard with my name on it, and a coral-pink Teenage Engineering pocket synth." },
+  { src: "photos/IMG_1082.jpg", slot: "s4", pos: "center 30%",
     caption: "BUILD · TINKER · CODE · ITERATE — a pixel-art mural that ran the length of the corridor." },
-  { src: "photos/IMG_1092.jpg", slot: "s3",
+  { src: "photos/IMG_1092.jpg", slot: "s5",
     caption: "\"Bouncing Clawd\" by Ben James — aluminum, bronze, steel, solenoid, microcontroller (2026). Claude as Dieter Rams artifact." },
-  { src: "photos/IMG_1093.jpg", slot: "s4",
+  { src: "photos/IMG_1093.jpg", slot: "s6",
     caption: "Tabletop still life: desk lamp, a transistor radio, and a small herd of cloud creatures." },
-  { src: "photos/IMG_1107.jpg", slot: "s5",
+  { src: "photos/IMG_1107.jpg", slot: "s7",
     caption: "The c/c lounge between sessions — sit, look up, see the same characters from the title screen." },
-  { src: "photos/IMG_1067.jpg", slot: "s6",
+  { src: "photos/IMG_1067.jpg", slot: "s8",
     caption: "A pixel-art interlude played between talks — a tiny Claude wandering an after-hours bodega." },
-  { src: "photos/IMG_1117.jpg", slot: "s7",
+  { src: "photos/IMG_1117.jpg", slot: "s9",
     caption: "The walk in. San Francisco, a graph drawn in trolley wires above Van Ness and Hayes." },
-  { src: "photos/IMG_1122.jpg", slot: "s8",
+  { src: "photos/IMG_1122.jpg", slot: "s10",
     caption: "Took a ride back with AI-driving Waymo car back to my hotel. Crazy." }
 ];
 

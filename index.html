@@ -4,10 +4,20 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Code with Claude · SF 2026 — Interactive Timeline</title>
-<meta name="description" content="An unofficial interactive recap of Code with Claude San Francisco (May 6, 2026) and the Extended workshop day (May 7, 2026). Talks, workshops, announcements, and video embeds.">
-<meta property="og:title" content="Code with Claude · SF 2026 — Interactive Timeline">
-<meta property="og:description" content="Talks, workshops, and announcements from Code with Claude SF 2026.">
+<meta name="description" content="Kevin's trip to Code with Claude SF 2026 — interactive recap with videos, slide bullets, announcements, and 47 polaroids from the floor.">
+<meta property="og:title" content="Kevin's trip to Code with Claude Conf '26">
+<meta property="og:description" content="Two days of announcements, deep talks, and hands-on workshops — a hand-curated recap with videos, slide bullets, and 47 polaroids from the floor.">
 <meta property="og:type" content="website">
+<meta property="og:url" content="https://program247365.github.io/code-with-claude-2026-sf-recap/">
+<meta property="og:image" content="https://program247365.github.io/code-with-claude-2026-sf-recap/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="The Claude splat on the main stage of Code with Claude SF 2026, overlaid with the title 'Kevin's trip to Code with Claude Conf '26'">
+<meta property="og:site_name" content="Code with Claude · SF 2026 recap">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Kevin's trip to Code with Claude Conf '26">
+<meta name="twitter:description" content="An unofficial interactive recap — videos, slide bullets, announcements, and 47 polaroids from the floor.">
+<meta name="twitter:image" content="https://program247365.github.io/code-with-claude-2026-sf-recap/og-image.png">
 <link rel="icon" type="image/svg+xml" href="claude-splat.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -448,6 +458,7 @@
     display: block;
     background: #1a1815;
     object-fit: cover;
+    object-position: var(--obj-pos, center center);
   }
   .venue-photo figcaption {
     padding: .7rem .25rem .1rem;
@@ -462,7 +473,7 @@
   .venue-photo.s1 { grid-column: span 7; transform: rotate(-1.6deg); }
   .venue-photo.s1 img { aspect-ratio: 4/3; }
   .venue-photo.s2 { grid-column: span 5; transform: rotate(1.4deg); }
-  .venue-photo.s2 img { aspect-ratio: 4/3; }
+  .venue-photo.s2 img { aspect-ratio: 16/9; }
   .venue-photo.s3 { grid-column: span 4; transform: rotate(2.2deg); }
   .venue-photo.s3 img { aspect-ratio: 4/3; }
   .venue-photo.s4 { grid-column: span 4; transform: rotate(-2.4deg); }
@@ -1508,7 +1519,7 @@ const THEMES = [
 const VENUE_PHOTOS = [
   { src: "photos/IMG_1065.jpg", slot: "s1",
     caption: "The Claude splat, twelve feet tall, on the main stage — smaller siblings echoed across the side-wall alcoves." },
-  { src: "photos/IMG_1082.jpg", slot: "s2",
+  { src: "photos/IMG_1082.jpg", slot: "s2", pos: "center 30%",
     caption: "BUILD · TINKER · CODE · ITERATE — a pixel-art mural that ran the length of the corridor." },
   { src: "photos/IMG_1092.jpg", slot: "s3",
     caption: "\"Bouncing Clawd\" by Ben James — aluminum, bronze, steel, solenoid, microcontroller (2026). Claude as Dieter Rams artifact." },
@@ -1521,7 +1532,7 @@ const VENUE_PHOTOS = [
   { src: "photos/IMG_1117.jpg", slot: "s7",
     caption: "The walk in. San Francisco, a graph drawn in trolley wires above Van Ness and Hayes." },
   { src: "photos/IMG_1122.jpg", slot: "s8",
-    caption: "A perfect coda to the self-driving-company talk — spotted on the walk back." }
+    caption: "Took a ride back with AI-driving Waymo car back to my hotel. Crazy." }
 ];
 
 // ─── slide captures: bullets transcribed from Kevin's photos of session slides ───
@@ -2138,12 +2149,14 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape' && $modal.cla
 (function renderVenue() {
   const grid = document.getElementById('venueGallery');
   if (!grid) return;
-  grid.innerHTML = VENUE_PHOTOS.map((p, i) => `
-    <figure class="venue-photo ${esc(p.slot)}" data-idx="${i}">
-      <img src="${esc(p.src)}" alt="${esc(p.caption)}" loading="lazy" decoding="async">
-      <figcaption>${esc(p.caption)}</figcaption>
-    </figure>
-  `).join('');
+  grid.innerHTML = VENUE_PHOTOS.map((p, i) => {
+    const styleAttr = p.pos ? ` style="--obj-pos: ${esc(p.pos)}"` : '';
+    return `
+      <figure class="venue-photo ${esc(p.slot)}" data-idx="${i}">
+        <img src="${esc(p.src)}" alt="${esc(p.caption)}" loading="lazy" decoding="async"${styleAttr}>
+        <figcaption>${esc(p.caption)}</figcaption>
+      </figure>`;
+  }).join('');
   // click any venue photo → lightbox, with all 8 as the stack so users can flip through
   const photoSet = VENUE_PHOTOS.map(p => ({
     src: p.src, day: 2, time: "—",

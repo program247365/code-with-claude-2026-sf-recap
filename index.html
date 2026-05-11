@@ -1304,25 +1304,50 @@ const SESSIONS = [
     tags:["Engineering org","Process","AI-native"], youtubeId:"igO8iyca2_g",
     sessionUrl:"https://claude.com/code-with-claude/session/sf-running-an-ai-native-engineering-org" },
 
+  { day:1, time:"14:35", title:"Building AI-native: Inside the stacks powering Cognition, Gamma, and Harvey", speaker:"Deeni Fatiha (Gamma), Niko Grupen (Harvey), Walden Yan (Cognition) — moderated by Beth Robertson (Anthropic)", type:"talk",
+    summary:"Three AI-native product teams examine the architectural choices behind their platforms — multi-agent orchestration, MCP deployment, and the design tradeoffs of autonomous agents at production scale.",
+    tags:["Panel","Multi-agent","MCP","AI-native"], youtubeId:null,
+    sessionUrl:"https://claude.com/code-with-claude/session/sf-building-ai-native-inside-the-stacks-powering-cognition-gamma-and-harvey" },
+
   { day:1, time:"15:20", title:"The thinking lever", speaker:"Matt Bleifer — Anthropic Research Product", type:"talk",
     summary:"Adaptive thinking and effort controls — how to decide how much Claude should reason for each task. Thinking budgets, effort levels, and the cost / latency / quality tradeoffs that come with them.",
     tags:["Thinking","Effort","Cost/quality"], youtubeId:"OXJO4LldSnc",
     sessionUrl:"https://claude.com/code-with-claude/session/sf-the-thinking-lever" },
+
+  { day:1, time:"15:20", title:"Architecting for model step-changes: A fireside with Vercel's Guillermo Rauch", speaker:"Guillermo Rauch (CEO, Vercel) & Angela Jiang (Anthropic)", type:"keynote",
+    summary:"How Vercel prepared v0 for Opus 4.5's release through deliberate architectural decisions — strategic bets, lessons learned, and what it means for a frontier platform team to embrace an \"agent-pilled\" approach.",
+    tags:["Fireside","Vercel","Architecture"], youtubeId:null,
+    sessionUrl:"https://claude.com/code-with-claude/session/sf-architecting-for-model-step-changes-a-fireside-with-vercels-guillermo-rauch" },
 
   { day:1, time:"16:05", title:"Building with Claude on Google Cloud", speaker:"Ivan Nardini — Google Cloud", type:"workshop",
     summary:"A live build spanning five roles and the full software lifecycle — Claude plus Google Cloud, subagents, MCP servers, and custom skills. Audience tests the finished app right after the session.",
     tags:["Google Cloud","MCP","Subagents"], youtubeId:"SqHsS737CeA",
     sessionUrl:"https://claude.com/code-with-claude/session/sf-building-with-claude-on-google-cloud" },
 
+  { day:1, time:"16:05", title:"How Datadog built a universal machine tool for Claude Code", speaker:"Sesh Nalla — VP of Engineering, Datadog", type:"talk",
+    summary:"The vast majority of Datadog engineers use Claude Code in production. As sessions got more sophisticated, reusable tools for verification, debugging, and orchestration emerged — and consolidated into a single \"universal machine tool\".",
+    tags:["Datadog","Claude Code","Tooling"], youtubeId:null,
+    sessionUrl:"https://claude.com/code-with-claude/session/sf-how-datadog-built-a-universal-machine-tool-for-claude-code" },
+
   { day:1, time:"16:50", title:"Evaluating and improving Replit Agent at scale", speaker:"Michele Catasta (Replit) & Hannah Moran (Anthropic)", type:"talk",
     summary:"How Replit closed the AI-product evaluation gap with ViBench — a public vibe-coding benchmark that scores whether the generated app actually works — and the offline/online loop driving improvements.",
     tags:["Evals","Replit","ViBench"], youtubeId:"snroDwX1-JU",
     sessionUrl:"https://claude.com/code-with-claude/session/sf-evaluating-and-improving-replit-agent-at-scale" },
 
+  { day:1, time:"16:50", title:"Getting more out of the Claude Platform", speaker:"Brad Abrams — Anthropic, Claude Platform PM lead", type:"talk",
+    summary:"Cut cost, manage context, boost intelligence — a live-demo tour of the latest Claude Platform features. Prompt caching, context management techniques, and cost-effective strategies for production workloads.",
+    tags:["Platform","Caching","Cost"], youtubeId:null,
+    sessionUrl:"https://claude.com/code-with-claude/session/sf-getting-more-out-of-the-claude-platform" },
+
   { day:1, time:"17:35", title:"Giving coding agents their own computers: How Cursor built cloud agents", speaker:"Alexi Robbins — Cursor", type:"talk",
     summary:"Each Cursor cloud agent gets its own isolated VM — write code, run a browser, test changes, ship merge-ready PRs in parallel. These agents now author over 30% of Cursor's internally merged PRs.",
     tags:["Cursor","Cloud agents","Sandboxing"], youtubeId:"BbYSGxtsMic",
     sessionUrl:"https://claude.com/code-with-claude/session/sf-giving-coding-agents-their-own-computers-how-cursor-built-cloud-agents" },
+
+  { day:1, time:"17:35", title:"The Capability Curve", speaker:"Alex Albert — Anthropic", type:"talk",
+    summary:"Frontier models are advancing fast — this talk traces the trajectory and what it means for developers building on Claude. The bet: assume next year's model is materially better, and build on the curve, not the snapshot.",
+    tags:["Capability","Strategy","Forecast"], youtubeId:null,
+    sessionUrl:"https://claude.com/code-with-claude/session/sf-the-capability-curve" },
 
   // ═══════════════ DAY 2 — Code with Claude Extended (May 7, 2026) ═══════════════
   { day:2, time:"09:30", title:"Community general session", speaker:"Boris Cherny — Anthropic", type:"keynote",

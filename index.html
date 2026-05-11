@@ -63,14 +63,49 @@
     transition: opacity 1.2s ease;
   }
   .hero-video.ready { opacity: .85; }
+  /* Two-layer overlay:
+     1. text-legibility wash — top-heavy, fades out by the lower third so it
+        doesn't fight with the bottom blend.
+     2. bottom fade to var(--bg) — paints the lower portion of the hero in
+        whatever the page background is. In light mode that's cream, so the
+        hero softly dissolves into the sticky bar / announcements below; in
+        dark mode it's deep brown, so the hero just deepens.
+     Layered in source order (first = on top). */
   .hero-overlay {
     position: absolute;
     inset: 0;
     z-index: -1;
     pointer-events: none;
     background:
-      radial-gradient(120% 80% at 50% 100%, var(--bg) 0%, color-mix(in srgb, var(--bg) 70%, transparent) 35%, transparent 75%),
-      linear-gradient(180deg, rgba(10,10,8,0.55) 0%, rgba(10,10,8,0.15) 35%, rgba(10,10,8,0.55) 100%);
+      linear-gradient(180deg,
+        transparent 0%,
+        transparent 50%,
+        color-mix(in srgb, var(--bg) 45%, transparent) 72%,
+        color-mix(in srgb, var(--bg) 90%, transparent) 92%,
+        var(--bg) 100%),
+      linear-gradient(180deg,
+        rgba(10,10,8,0.55) 0%,
+        rgba(10,10,8,0.22) 40%,
+        rgba(10,10,8,0.06) 65%,
+        transparent 80%);
+  }
+  /* In light mode the page is cream, but the video is high-contrast and
+     dark — soften the dark wash a touch more so it doesn't read as a
+     heavy black slab against the cream rest-of-page. */
+  @media (prefers-color-scheme: light) {
+    .hero-overlay {
+      background:
+        linear-gradient(180deg,
+          transparent 0%,
+          transparent 48%,
+          color-mix(in srgb, var(--bg) 55%, transparent) 70%,
+          color-mix(in srgb, var(--bg) 92%, transparent) 90%,
+          var(--bg) 100%),
+        linear-gradient(180deg,
+          rgba(10,10,8,0.40) 0%,
+          rgba(10,10,8,0.15) 40%,
+          transparent 70%);
+    }
   }
   /* Force readable text-on-video colors regardless of system theme */
   .hero .hero-eyebrow { color: #f3efe6; border-color: rgba(243,239,230,0.35); background: rgba(20,18,15,0.45); }

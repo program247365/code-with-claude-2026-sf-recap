@@ -397,6 +397,109 @@
     .polaroid img { height: 150px; }
   }
 
+  /* ────────── venue gallery (between sticky bar and announcements) ────────── */
+  .venue {
+    background: linear-gradient(180deg, var(--bg) 0%, var(--bg-dim) 100%);
+    border-bottom: 1px solid var(--rule);
+  }
+  .venue .section-head h2 {
+    font-size: clamp(1.8rem, 3.4vw, 2.6rem);
+  }
+  .venue .lead {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 1.05rem;
+    color: var(--ink-soft);
+    max-width: 56ch;
+    margin: 0 0 2.5rem;
+    line-height: 1.55;
+  }
+  .venue-gallery {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 1.6rem 1.4rem;
+  }
+  .venue-photo {
+    position: relative;
+    background: #f6f1e6;
+    padding: 12px 12px 14px;
+    border-radius: 2px;
+    box-shadow:
+      0 1px 0 rgba(0,0,0,0.05) inset,
+      0 10px 26px -8px rgba(31,30,28,0.32),
+      0 2px 8px rgba(31,30,28,0.12);
+    transition: transform .35s cubic-bezier(.34,1.1,.4,1), box-shadow .3s ease, z-index 0s linear .35s;
+    cursor: zoom-in;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+  }
+  .venue-photo:hover {
+    transform: rotate(0deg) scale(1.04) translateY(-4px) !important;
+    box-shadow:
+      0 1px 0 rgba(0,0,0,0.06) inset,
+      0 22px 50px -12px rgba(31,30,28,0.45),
+      0 6px 14px rgba(31,30,28,0.18);
+    z-index: 6;
+    transition-delay: 0s;
+  }
+  .venue-photo img {
+    width: 100%;
+    display: block;
+    background: #1a1815;
+    object-fit: cover;
+  }
+  .venue-photo figcaption {
+    padding: .7rem .25rem .1rem;
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: .82rem;
+    line-height: 1.45;
+    color: #2a2723;
+    text-align: center;
+  }
+  /* per-slot grid spans + aspect ratios + tilts */
+  .venue-photo.s1 { grid-column: span 7; transform: rotate(-1.6deg); }
+  .venue-photo.s1 img { aspect-ratio: 4/3; }
+  .venue-photo.s2 { grid-column: span 5; transform: rotate(1.4deg); }
+  .venue-photo.s2 img { aspect-ratio: 4/3; }
+  .venue-photo.s3 { grid-column: span 4; transform: rotate(2.2deg); }
+  .venue-photo.s3 img { aspect-ratio: 4/3; }
+  .venue-photo.s4 { grid-column: span 4; transform: rotate(-2.4deg); }
+  .venue-photo.s4 img { aspect-ratio: 4/3; }
+  .venue-photo.s5 { grid-column: span 4; transform: rotate(1.8deg); }
+  .venue-photo.s5 img { aspect-ratio: 4/3; }
+  .venue-photo.s6 { grid-column: span 5; transform: rotate(-1.2deg); }
+  .venue-photo.s6 img { aspect-ratio: 4/3; }
+  .venue-photo.s7 { grid-column: span 4; transform: rotate(2.5deg); }
+  .venue-photo.s7 img { aspect-ratio: 4/3; }
+  .venue-photo.s8 { grid-column: span 3; transform: rotate(-2deg); }
+  .venue-photo.s8 img { aspect-ratio: 3/4; }
+  .venue-credit {
+    margin-top: 2.5rem;
+    text-align: right;
+    font-family: var(--mono);
+    font-size: .7rem;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+  }
+  @media (max-width: 900px) {
+    .venue-photo, .venue-photo.s1, .venue-photo.s2, .venue-photo.s3, .venue-photo.s4,
+    .venue-photo.s5, .venue-photo.s6, .venue-photo.s7, .venue-photo.s8 {
+      grid-column: span 6;
+      transform: rotate(0deg);
+    }
+    .venue-photo:nth-child(odd) { transform: rotate(-1deg); }
+    .venue-photo:nth-child(even) { transform: rotate(1deg); }
+  }
+  @media (max-width: 560px) {
+    .venue-photo, .venue-photo.s1, .venue-photo.s2, .venue-photo.s3, .venue-photo.s4,
+    .venue-photo.s5, .venue-photo.s6, .venue-photo.s7, .venue-photo.s8 {
+      grid-column: span 12;
+    }
+  }
+
   /* ────────── announcements ────────── */
   .announcements { padding-top: 4rem; padding-bottom: 4rem; }
   .ann-grid {
@@ -958,6 +1061,18 @@
   </div>
 </div>
 
+<div class="venue">
+  <section class="shell" style="padding-top: 4rem; padding-bottom: 4rem;">
+    <div class="section-head">
+      <h2>Around the room</h2>
+      <span class="meta">the venue · the walks · between sessions</span>
+    </div>
+    <p class="lead">The conference inhabited a converted SoMa warehouse — cherry-wood paneling, coral-pink screens, and a small army of pixel-art Claudes drifting through the corridors. A few moments that weren't on the official program.</p>
+    <div class="venue-gallery" id="venueGallery"></div>
+    <div class="venue-credit">All photos · Kevin B. Ridgway</div>
+  </section>
+</div>
+
 <section class="shell announcements">
   <div class="section-head">
     <h2>The big announcements</h2>
@@ -1386,6 +1501,27 @@ const THEMES = [
       sessionUrl: "https://claude.com/code-with-claude/session/sf-ext-how-we-claude-code"
     }
   }
+];
+
+// ─── art-directed venue gallery (non-talk photos with editorial captions) ───
+// Order matters: positions s1–s8 are sized + tilted in the CSS above.
+const VENUE_PHOTOS = [
+  { src: "photos/IMG_1065.jpg", slot: "s1",
+    caption: "The Claude splat, twelve feet tall, on the main stage — smaller siblings echoed across the side-wall alcoves." },
+  { src: "photos/IMG_1082.jpg", slot: "s2",
+    caption: "BUILD · TINKER · CODE · ITERATE — a pixel-art mural that ran the length of the corridor." },
+  { src: "photos/IMG_1092.jpg", slot: "s3",
+    caption: "\"Bouncing Clawd\" by Ben James — aluminum, bronze, steel, solenoid, microcontroller (2026). Claude as Dieter Rams artifact." },
+  { src: "photos/IMG_1093.jpg", slot: "s4",
+    caption: "Tabletop still life: desk lamp, a transistor radio, and a small herd of cloud creatures." },
+  { src: "photos/IMG_1107.jpg", slot: "s5",
+    caption: "The c/c lounge between sessions — sit, look up, see the same characters from the title screen." },
+  { src: "photos/IMG_1067.jpg", slot: "s6",
+    caption: "A pixel-art interlude played between talks — a tiny Claude wandering an after-hours bodega." },
+  { src: "photos/IMG_1117.jpg", slot: "s7",
+    caption: "The walk in. San Francisco, a graph drawn in trolley wires above Van Ness and Hayes." },
+  { src: "photos/IMG_1122.jpg", slot: "s8",
+    caption: "A perfect coda to the self-driving-company talk — spotted on the walk back." }
 ];
 
 // ─── slide captures: bullets transcribed from Kevin's photos of session slides ───
@@ -1996,6 +2132,29 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape' && $modal.cla
       }, 1400);
     }
   } catch (_) { /* localStorage disabled — skip the auto-hint */ }
+})();
+
+// ─── render the venue gallery (data lives in VENUE_PHOTOS above) ───
+(function renderVenue() {
+  const grid = document.getElementById('venueGallery');
+  if (!grid) return;
+  grid.innerHTML = VENUE_PHOTOS.map((p, i) => `
+    <figure class="venue-photo ${esc(p.slot)}" data-idx="${i}">
+      <img src="${esc(p.src)}" alt="${esc(p.caption)}" loading="lazy" decoding="async">
+      <figcaption>${esc(p.caption)}</figcaption>
+    </figure>
+  `).join('');
+  // click any venue photo → lightbox, with all 8 as the stack so users can flip through
+  const photoSet = VENUE_PHOTOS.map(p => ({
+    src: p.src, day: 2, time: "—",
+    label: p.caption
+  }));
+  grid.querySelectorAll('.venue-photo').forEach(fig => {
+    fig.addEventListener('click', () => {
+      const idx = parseInt(fig.dataset.idx, 10);
+      openLightbox(photoSet, idx);
+    });
+  });
 })();
 
 // ─── render the themes section (data lives in THEMES above) ───

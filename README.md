@@ -9,7 +9,7 @@ An unofficial fan recap of [**Code with Claude San Francisco**](https://claude.c
 ## What's in the site
 
 - **39 sessions** across two days, organized as a single scrollable timeline with day breaks and per-talk metadata
-- **Embedded YouTube videos** for all 19 Day 1 sessions (the official San Francisco recordings). The Extended day wasn't recorded; six Day 2 workshops link the London edition of the same session, labeled as such
+- **Embedded YouTube videos** for all 19 Day 1 sessions (the official San Francisco recordings). The Extended day wasn't recorded; six Day 2 workshops link the London edition of the same session, labeled with its presenter
 - **Themes view** — high-level patterns from the conference, each linked to the source talk that surfaced it
 - **Around the room** — art-directed venue gallery from personal photos, HEIC → JPEG with EXIF scrubbed
 - **Light + dark mode** with a deliberately gentle light masthead

@@ -1204,7 +1204,7 @@
     <a href="https://claude.com/blog?ref=kbr.sh" target="_blank" rel="noopener">Claude Blog</a>
     <a href="https://platform.claude.com/cookbook/?ref=kbr.sh" target="_blank" rel="noopener">Claude Cookbook</a>
   </div>
-  <p class="fine">Unofficial fan recap built from public talk pages and personal notes. Not affiliated with Anthropic. Videos embedded from YouTube where available; Day 1 recordings are the official San Francisco uploads; Anthropic didn&rsquo;t publish recordings of the Extended day, so a few Day 2 workshops link the London edition of the same session instead. Last updated November 18, 2026.</p>
+  <p class="fine">Unofficial fan recap built from public talk pages and personal notes. Not affiliated with Anthropic. Videos embedded from YouTube where available; Day 1 recordings are the official San Francisco uploads; Anthropic didn&rsquo;t publish recordings of the Extended day, so six Day 2 workshops link the London edition of the same session instead, with its presenter named. Last updated November 18, 2026.</p>
   <p class="fine">Made by <a href="https://kbr.sh" target="_blank" rel="noopener">Kevin B. Ridgway</a> and <a href="https://claude.ai?ref=kbr.sh" target="_blank" rel="noopener">Claude</a>!</p>
 </footer>
 
@@ -1260,8 +1260,8 @@ const esc = (s) => String(s).replace(/[&<>"']/g, c => ({
 }[c]));
 
 // ─── session data: single source of truth ───
-// youtubeId:null means no recording was published. videoFrom marks a
-// recording of the same session from another city's event.
+// youtubeId:null means no recording was published. videoFrom + videoBy mark
+// a recording of the same session from another city's event and who presents it.
 const SESSIONS = [
   // ═══════════════ DAY 1 — Code with Claude SF (May 6, 2026) ═══════════════
   { day:1, time:"09:00", title:"Opening Keynote", speaker:"Ami Vora, Dianne Penn, Angela Jiang, Katelyn Lesse, Cat Wu, Boris Cherny — Anthropic", type:"keynote",
@@ -1377,7 +1377,7 @@ const SESSIONS = [
 
   { day:2, time:"10:00", title:"How we Claude Code", speaker:"Thariq Shihipar", type:"workshop",
     summary:"Inside Thariq's actual workflow. The magic phrase is \"interview me\". Pair Claude with the asktool for variations, and build apps that are verifiable at runtime — not just at test time.",
-    tags:["Workflow","Verifiable React","Zed"], youtubeId:"IlqJqcl8ONE", videoFrom:"London",
+    tags:["Workflow","Verifiable React","Zed"], youtubeId:"IlqJqcl8ONE", videoFrom:"London", videoBy:"Arnaud Doko",
     takeaways:[
       "\"Interview me\" — let Claude pull intent out of your head before it writes a line.",
       "Bun is held up as the best-verified repo in the world — give the model something concrete to verify against.",
@@ -1397,7 +1397,7 @@ const SESSIONS = [
 
   { day:2, time:"11:00", title:"Ship your first Managed Agent", speaker:"Gagan Bhat", type:"workshop",
     summary:"A hands-on walkthrough of shipping a real Claude Managed Agent end-to-end — define, deploy, test, iterate.",
-    tags:["Workshop","Managed Agents"], youtubeId:"19HDQ9HppOA", videoFrom:"London",
+    tags:["Workshop","Managed Agents"], youtubeId:"19HDQ9HppOA", videoFrom:"London", videoBy:"Isabella He",
     sessionUrl:"https://claude.com/code-with-claude/session/sf-ext-ship-your-first-managed-agent" },
 
   { day:2, time:"11:30", title:"Building AI-native: What three founders bet on and what they'd change", speaker:"Varun Anand, Madhav Jha, Shain Noor — moderated by Lauren Reeder", type:"talk",
@@ -1417,12 +1417,12 @@ const SESSIONS = [
 
   { day:2, time:"12:00", title:"Agents that remember", speaker:"Tina Vachovsky", type:"workshop",
     summary:"A workshop on building agents with durable memory — when to remember, what to forget, and how to validate that memory is helping not hurting.",
-    tags:["Memory","Workshop","Agents"], youtubeId:"geUv4CjPpxI", videoFrom:"London",
+    tags:["Memory","Workshop","Agents"], youtubeId:"geUv4CjPpxI", videoFrom:"London", videoBy:"Kevin Chen",
     sessionUrl:"https://claude.com/code-with-claude/session/sf-ext-agents-that-remember" },
 
   { day:2, time:"13:00", title:"Evals for Taste: Hill-Climbing a Slide-Generation Agent", speaker:"Felix Becker", type:"workshop",
     summary:"Build evals for subjective work. Have Claude generate the eval generator. Use the best model as judge, ship with Sonnet — and the gap pays for itself.",
-    tags:["Evals","LLM-as-judge","Aesthetics"], youtubeId:"v9FTCvkV_a0", videoFrom:"London",
+    tags:["Evals","LLM-as-judge","Aesthetics"], youtubeId:"v9FTCvkV_a0", videoFrom:"London", videoBy:"Jiri De Jonghe",
     takeaways:[
       "Programmatic graders: slide count, font-size minimums, emoji count, text density, image presence.",
       "Model-as-judge graders: aesthetics & layout (0–5), title↔body alignment (0–5).",
@@ -1442,7 +1442,7 @@ const SESSIONS = [
 
   { day:2, time:"14:00", title:"Tool, skill, or subagent? Decomposing an agent that outgrew its prompt", speaker:"Tanveer Mittal", type:"workshop",
     summary:"Inherit StockPilot — an inventory agent with 12 tools, 3 hardcoded subagents, and a 402-line system prompt. Decompose it live on Claude Managed Agents and run evals after every change.",
-    tags:["Skills","Subagents","Managed Agents","MCP"], youtubeId:"mWvtOHlZM-I", videoFrom:"London",
+    tags:["Skills","Subagents","Managed Agents","MCP"], youtubeId:"mWvtOHlZM-I", videoFrom:"London", videoBy:"Will Steuk",
     takeaways:[
       "Failure mode: critical context separated by ~200 lines in a long prompt — the agent forgot the active promo multiplier mid-task.",
       "Trim the system prompt to role + guardrails. Move domain procedures into callable skills loaded on demand.",
@@ -1472,7 +1472,7 @@ const SESSIONS = [
 
   { day:2, time:"15:00", title:"Agent Battle: Mine the most diamonds in 45 minutes", speaker:"Matt Roknich", type:"workshop",
     summary:"Build an agent in 45 minutes whose only job is to mine more diamonds than everyone else's agent. A live competitive workshop with a literal leaderboard.",
-    tags:["Workshop","Competition","Fun"], youtubeId:"dxqX_6ciVQA", videoFrom:"London",
+    tags:["Workshop","Competition","Fun"], youtubeId:"dxqX_6ciVQA", videoFrom:"London", videoBy:"Ben Lehrburger",
     sessionUrl:"https://claude.com/code-with-claude/session/sf-ext-agent-battle-mine-the-most-diamonds-in-45-minutes" },
 
   { day:2, time:"15:35", title:"Claude & the self-driving company", speaker:"Nicolai Ouporov", type:"talk",
@@ -1961,7 +1961,7 @@ function renderDay(day) {
             <p class="summary">${esc(s.summary)}</p>
             <div class="tags">${s.tags.map(t => `<span class="tag">${esc(t)}</span>`).join('')}</div>
             ${unposted ? `<div class="unposted-flag">No recording published</div>` : ''}
-            ${s.videoFrom ? `<div class="unposted-flag">Recording from the ${esc(s.videoFrom)} edition</div>` : ''}
+            ${s.videoFrom ? `<div class="unposted-flag">${esc(s.videoFrom)} edition recording &middot; ${esc(s.videoBy)}</div>` : ''}
           </button>
         </div>
         <div class="tl-spine">
@@ -2046,7 +2046,7 @@ function openModal(idx) {
     <span class="pill ${esc(s.type)}">${esc(PILL_LABELS[s.type] || 'Session')} &middot; ${esc(s.time)} &middot; Day ${s.day}</span>
     <h3 id="modalTitle">${esc(s.title)}</h3>
     <p class="speaker">with <b>${esc(s.speaker)}</b></p>
-    ${s.videoFrom ? `<p class="speaker">The San Francisco session wasn't recorded. This video is the ${esc(s.videoFrom)} edition of the same session, so the presenter may differ.</p>` : ''}
+    ${s.videoFrom ? `<p class="speaker">The San Francisco session wasn't recorded. This video is the same workshop at Code with Claude ${esc(s.videoFrom)}, presented by ${esc(s.videoBy)}.</p>` : ''}
     <p class="abstract">${esc(s.summary)}</p>
     ${s.takeaways ? `
       <div class="takeaways">

@@ -9,8 +9,8 @@ An unofficial fan recap of [**Code with Claude San Francisco**](https://claude.c
 ## What's in the site
 
 - **39 sessions** across two days, organized as a single scrollable timeline with day breaks and per-talk metadata
-- **Embedded YouTube videos** for every session that's been posted — the rest say "Not Yet Posted" until the daily cron picks them up
-- **Themes view** — high-level patterns from the conference, each linked to the source talk that surfaced it (theme attributions are verified daily; broken ones surface as warnings rather than getting silently rewritten)
+- **Embedded YouTube videos** for all 19 Day 1 sessions (the official San Francisco recordings). The Extended day wasn't recorded; six Day 2 workshops link the London edition of the same session, labeled as such
+- **Themes view** — high-level patterns from the conference, each linked to the source talk that surfaced it
 - **Around the room** — art-directed venue gallery from personal photos, HEIC → JPEG with EXIF scrubbed
 - **Light + dark mode** with a deliberately gentle light masthead
 - **Claude FM** — an optional ambient stream that plays as the masthead background; pill-toggleable
@@ -36,18 +36,11 @@ python3 -m http.server 8000
 
 Then open <http://localhost:8000>.
 
-## How the timeline stays current
+## How the timeline was kept current
 
-A GitHub Action runs daily at 15:00 UTC (08:00 PT). It:
+While recordings were still being published, a script crawled the official [San Francisco playlist](https://www.youtube.com/playlist?list=PLmWCw1CzcFim2obQ-w3ohbULOfwp5lApR) and both conference pages, matched video titles to session titles, and checked that every theme still pointed at a real session. It never wrote prose, added sessions, or rewrote themes — those were judgment calls.
 
-1. Crawls the [@claude YouTube channel](https://www.youtube.com/@claude) and both official conference pages (clicking "View more" until every session is in the DOM).
-2. Fuzzy-matches video titles to session titles using a normalized-token Jaccard score.
-3. **Auto-applies high-confidence matches** (score ≥ 0.90) — flips `youtubeId: null` to `youtubeId: "<id>"` in the SESSIONS array.
-4. Verifies every theme's `sessionUrl` still resolves to a session that exists.
-5. Refreshes venue photos if new ones have been dropped into the source repo (HEIC → JPEG via `sips`, EXIF stripped via `exiftool`).
-6. Commits and pushes back. Anything below the 0.90 threshold — medium-confidence matches, newly-discovered sessions, broken theme links — surfaces as a workflow warning for human review rather than getting auto-written.
-
-The script never auto-writes prose, auto-adds sessions, or rewrites themes. Those are judgment calls.
+The conference is over and every published recording is linked, so the scheduled run was retired in November 2026. The site is now static.
 
 ## Adding or editing a session
 
@@ -62,7 +55,7 @@ Find `const SESSIONS` in [`index.html`](./index.html) and edit or add an entry:
   type: "talk",                    // keynote | announce | talk | workshop | officehours
   summary: "…",                    // short blurb on the timeline card
   tags: ["evals", "agents"],
-  youtubeId: "dQw4w9WgXcQ",        // or null → shows "Not Yet Posted"
+  youtubeId: "dQw4w9WgXcQ",        // or null → shows "No recording published"
   takeaways: ["…", "…"],           // optional bullets in the modal
   sessionUrl: "https://…"          // optional link in the modal footer
 }
